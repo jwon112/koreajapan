@@ -1,0 +1,39 @@
+DBMS:
+sql server
+
+Error:
+com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스에 '#observation_mapping'(이)라는 개체가 이미 있습니다.
+
+SQL:
+CREATE TABLE #observation_mapping
+    (
+     meas_type						varchar(50)					NULL , 
+     id_value						varchar(50)					NULL ,
+     answer							bigint						NULL ,
+     observation_concept_id			bigint						NULL ,
+	 observation_type_concept_id	bigint						NULL ,
+	 observation_unit_concept_id	bigint						NULL ,
+	 value_as_concept_id			bigint						NULL ,
+	 value_as_number				float						NULL 
+	)
+
+
+R version:
+R version 4.5.2 (2025-10-31 ucrt)
+
+Platform:
+x86_64-w64-mingw32
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- etlKoreanNSC (0.9.0)
+- SqlRender (1.19.4)
+- DatabaseConnector (7.0.0)

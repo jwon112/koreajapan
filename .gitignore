@@ -1,0 +1,23 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env/
+.venv/
+
+# Data (SAS 원본은 용량 크면 제외; 필요시 이 줄 삭제)
+*.sas7bdat
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,129 @@
+2025-11-26 18:54:14	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	empty CDM tables are being generated
+2025-11-26 18:54:14	[Main thread]	FATAL	checkmate	%and%	객체 'connectionDetails'를 찾을 수 없습니다
+2025-11-26 18:54:44	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The folder location pathToDriver = ' C:/Users/chaeyoon/Documents/jdbcDrivers_sqlserver ' does not exist. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 18:55:05	[Main thread]	WARN			파일 'C:/Users/chaeyoon/Desktop/koreajapan/ETL---Korean-NSC/etlKoreanNSC/etlKoreanNSC.R'를 여는데 실패했습니다: No such file or directory
+2025-11-26 18:55:05	[Main thread]	FATAL			커넥션을 열 수 없습니다
+2025-11-26 18:56:12	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	empty CDM tables are being generated
+2025-11-26 18:56:12	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	empty CDM tables are being generated
+2025-11-26 18:56:12	[Main thread]	FATAL	checkmate	%and%	객체 'connectionDetails'를 찾을 수 없습니다
+2025-11-26 18:56:12	[Main thread]	FATAL	checkmate	%and%	객체 'connectionDetails'를 찾을 수 없습니다
+2025-11-26 19:00:49	[Main thread]	FATAL	DatabaseConnector	createConnectionDetails	인자 'path'가 올바르지 않습니다.
+2025-11-26 19:00:49	[Main thread]	FATAL	DatabaseConnector	createConnectionDetails	인자 'path'가 올바르지 않습니다.
+2025-11-26 19:01:58	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:01:58	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:02:52	[Main thread]	FATAL			'\P' is an unrecognized escape in character string (<input>:7:24)
+2025-11-26 19:02:52	[Main thread]	FATAL			'\P' is an unrecognized escape in character string (<input>:7:24)
+2025-11-26 19:03:44	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:03:44	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:03:44	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:03:44	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:03:45	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: This driver is not configured for integrated authentication. ClientConnectionId:242cc9b9-b1ea-4dc2-b6dd-e340026502ae
+2025-11-26 19:03:45	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: This driver is not configured for integrated authentication. ClientConnectionId:242cc9b9-b1ea-4dc2-b6dd-e340026502ae
+2025-11-26 19:05:03	[Main thread]	FATAL			사용되지 않은 인자 (driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver")
+2025-11-26 19:05:03	[Main thread]	FATAL			사용되지 않은 인자 (driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver")
+2025-11-26 19:06:10	[Main thread]	FATAL	DatabaseConnector	findPathToJar	No drivers matching pattern '^mssql-jdbc.*.jar$|^sqljdbc.*\.jar$'found in folder 'C:/Program Files/sqljdbc_13.2/kor/auth/x64'.  Please download the JDBC drivers for your database to the folder. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:06:10	[Main thread]	FATAL	DatabaseConnector	findPathToJar	No drivers matching pattern '^mssql-jdbc.*.jar$|^sqljdbc.*\.jar$'found in folder 'C:/Program Files/sqljdbc_13.2/kor/auth/x64'.  Please download the JDBC drivers for your database to the folder. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:10:10	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:10:10	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:10:10	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:10:10	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:10:10	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:10:10	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:11:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:11:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:11:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:11:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:11:43	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:11:43	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:13:40	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:13:40	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:13:40	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:13:40	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:13:40	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:13:40	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:13:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:13:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:13:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:13:43	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:13:43	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:13:43	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:16:04	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:16:04	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:16:04	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:16:04	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:16:04	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:16:04	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: The TCP/IP connection to the host DESKTOP-HBA9S76/SQLEXPRESS01, port 1433 has failed. Error: "DESKTOP-HBA9S76/SQLEXPRESS01. Verify the connection properties. Make sure that an instance of SQL Server is running on the host and accepting TCP/IP connections at the port. Make sure that TCP connections to the port are not blocked by a firewall.".
+2025-11-26 19:17:21	[Main thread]	FATAL			예상하지 못한 입력입니다. in "pathToDriver_auth <- "C:/Program Files/sqljdbc_13.2/kor/auth/x64" "
+2025-11-26 19:17:21	[Main thread]	FATAL			예상하지 못한 입력입니다. in "pathToDriver_auth <- "C:/Program Files/sqljdbc_13.2/kor/auth/x64" "
+2025-11-26 19:17:34	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:17:34	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2025-11-26 19:17:34	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:17:34	[Main thread]	INFO	DatabaseConnector	connectSqlServer	- Using Windows integrated security
+2025-11-26 19:17:34	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: This driver is not configured for integrated authentication. ClientConnectionId:64790a7e-2447-4d90-a40a-7d11027aabab
+2025-11-26 19:17:34	[Main thread]	FATAL	rJava	.jcheck	com.microsoft.sqlserver.jdbc.SQLServerException: This driver is not configured for integrated authentication. ClientConnectionId:64790a7e-2447-4d90-a40a-7d11027aabab
+2025-11-26 19:18:06	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:18:06	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:18:48	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:18:48	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:18:52	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:18:52	[Main thread]	FATAL			사용되지 않은 인자 (driver = odbcDriverName)
+2025-11-26 19:19:09	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:19:09	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:19:53	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:19:53	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:20:30	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:20:30	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:27:31	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:27:31	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:29:07	[Main thread]	WARN			파일 'C:/Users/chaeyoon/Desktop/koreajapan/ETL---Korean-NSC/etlKoreanNSC/etlKoreanNSC.R'를 여는데 실패했습니다: No such file or directory
+2025-11-26 19:29:07	[Main thread]	WARN			파일 'C:/Users/chaeyoon/Desktop/koreajapan/ETL---Korean-NSC/etlKoreanNSC/etlKoreanNSC.R'를 여는데 실패했습니다: No such file or directory
+2025-11-26 19:29:07	[Main thread]	FATAL			커넥션을 열 수 없습니다
+2025-11-26 19:29:07	[Main thread]	FATAL			커넥션을 열 수 없습니다
+2025-11-26 19:29:27	[Main thread]	WARN			파일 'C:/Users/chaeyoon/Desktop/koreajapan/ETL---Korean-NSC/etlKoreanNSC/R/etlKoreanNSC.R'를 여는데 실패했습니다: No such file or directory
+2025-11-26 19:29:27	[Main thread]	WARN			파일 'C:/Users/chaeyoon/Desktop/koreajapan/ETL---Korean-NSC/etlKoreanNSC/R/etlKoreanNSC.R'를 여는데 실패했습니다: No such file or directory
+2025-11-26 19:29:27	[Main thread]	FATAL			커넥션을 열 수 없습니다
+2025-11-26 19:29:27	[Main thread]	FATAL			커넥션을 열 수 없습니다
+2025-11-26 19:29:54	[Main thread]	INFO			ETL 060.Observation_period.sql
+2025-11-26 19:29:54	[Main thread]	INFO			ETL 060.Observation_period.sql
+2025-11-26 19:29:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.117 secs
+2025-11-26 19:29:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.117 secs
+2025-11-26 19:29:54	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
+2025-11-26 19:29:54	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
+2025-11-26 19:30:18	[Main thread]	INFO			ETL 030.Care_site.sql
+2025-11-26 19:30:18	[Main thread]	INFO			ETL 030.Care_site.sql
+2025-11-26 19:31:04	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 46.1 secs
+2025-11-26 19:31:04	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 46.1 secs
+2025-11-26 19:31:04	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
+2025-11-26 19:31:04	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
+2025-11-26 19:34:38	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:34:38	[Main thread]	FATAL	DatabaseConnector	checkPathToDriver	The `pathToDriver` argument hasn't been specified. Please set the path to the location containing the JDBC driver. See `?jdbcDrivers` for instructions on downloading the drivers.
+2025-11-26 19:36:33	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:36:33	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:39:49	[Main thread]	INFO	cli		[38;5;232m[36mℹ[38;5;232m Caught user interrupt, attempting a clean exit...[39m
+2025-11-26 19:39:49	[Main thread]	INFO	cli		[38;5;232m[36mℹ[38;5;232m Caught user interrupt, attempting a clean exit...[39m
+2025-11-26 19:39:50	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error       from \              . An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:39:50	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error       from \              . An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:39:53	[Main thread]	INFO			ETL 030.Care_site starting
+2025-11-26 19:39:53	[Main thread]	INFO			ETL 030.Care_site starting
+2025-11-26 19:40:54	[Main thread]	INFO			care_site rows: 525604
+2025-11-26 19:40:54	[Main thread]	INFO			care_site rows: 525604
+2025-11-26 19:40:54	[Main thread]	INFO			ETL 060.Observation_period starting
+2025-11-26 19:40:54	[Main thread]	INFO			ETL 060.Observation_period starting
+2025-11-26 19:40:54	[Main thread]	INFO			observation_period rows: 0
+2025-11-26 19:40:54	[Main thread]	INFO			observation_period rows: 0
+2025-11-26 19:40:54	[Main thread]	INFO			ETL 완료 (ODBC 버전).
+2025-11-26 19:40:54	[Main thread]	INFO			ETL 완료 (ODBC 버전).
+2025-11-26 19:41:11	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:41:11	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:41:11	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error 42S01 from \              [32m[Microsoft][ODBC Driver 17 for SQL Server][SQL Server][39m. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:41:11	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error 42S01 from \              [32m[Microsoft][ODBC Driver 17 for SQL Server][SQL Server][39m. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:41:23	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:41:23	[Main thread]	INFO			ETL 010.Master_table.sql
+2025-11-26 19:41:23	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error 42S01 from \              [32m[Microsoft][ODBC Driver 17 for SQL Server][SQL Server][39m. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:41:23	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: ODBC failed with error 42S01 from \              [32m[Microsoft][ODBC Driver 17 for SQL Server][SQL Server][39m. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/errorReportSql.txt
+2025-11-26 19:41:58	[Main thread]	INFO			ETL 020.Location.sql
+2025-11-26 19:41:58	[Main thread]	INFO			ETL 020.Location.sql
+2025-11-26 19:41:58	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0606 secs
+2025-11-26 19:41:58	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0606 secs
+2025-11-26 19:41:58	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
+2025-11-26 19:41:58	[Main thread]	FATAL	checkmate	reportAssertions	2 assertions failed:  * Variable 'targetDialect': Must be of type 'character', not 'NULL'.  * Variable 'targetDialect': Must be a subset of {'sql  * server','oracle','postgresql','pdw','impala','netezza','bigquery','spark','sqlite','redshift','hive','sqlite  * extended','duckdb','snowflake','synapse','iris'}, not 'NULL'.
