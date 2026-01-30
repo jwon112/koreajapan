@@ -38,7 +38,7 @@ executeNHISETL(
   NHISNSC_rawdata = "nhisnsc2013original.dbo",    # 원본 데이터가 있는 스키마 (DB명.dbo)
   NHISNSC_database = "nhisnsc2013cdm.dbo",   # 결과가 저장될 스키마
   Mapping_database = "nhisnsc2013cdm.dbo",   # 매핑 테이블이 있는 스키마 (보통 CDM과 동일하게 설정)
-  vocaFolder = "E:/새 폴더/한일연구/vocabulary_download_v5_{22c5992b-17e3-4556-873b-3767593dd8fe}_1762153439639",
+  vocaFolder = "C:/Users/chaeyoon/Desktop/koreajapan/vocabulary",
   
   # --- 원본 테이블 이름 설정 (위에서 정의한 list 사용) ---
   NHIS_JK = nhis_tables$JK,

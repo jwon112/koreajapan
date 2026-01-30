@@ -15,6 +15,9 @@ venv/
 # Data (SAS 원본은 용량 크면 제외; 필요시 이 줄 삭제)
 *.sas7bdat
 
+# Vocabulary (OMOP CDM vocabulary CSV 등; 용량 큼)
+vocabulary/
+
 # Jupyter
 .ipynb_checkpoints/
 
