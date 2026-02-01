@@ -1,6 +1,8 @@
 # 1. 라이브러리 로드
 library(DatabaseConnector)
 library(SqlRender)
+# etlKoreanNSC를 수정 후 재설치(devtools::install)했다면, R 세션 재시작 또는 아래 실행 후 스크립트 다시 실행:
+# detach("package:etlKoreanNSC", unload = TRUE); library(etlKoreanNSC)
 library(etlKoreanNSC) # 패키지가 로드되어 있어야 합니다 (devtools::load_all() 사용 권장)
 
 # 2. JDBC 드라이버 경로 (아까 설정한 경로)
@@ -57,21 +59,21 @@ executeNHISETL(
   # 처음 돌릴 때는 CDM_ddl = TRUE로 테이블을 만들어야 합니다.
   CDM_ddl = FALSE,              # CDM 빈 테이블 생성
   master_table = FALSE,         # 마스터 시퀀스 테이블 생성
-  import_voca = FALSE,
+  import_voca = TRUE,
   
   # 데이터 적재 (필요한 부분만 TRUE로 변경 가능)
   location = FALSE,
   care_site = FALSE,
   person = FALSE,
-  death = TRUE,
+  death = FALSE,
   observation_period = FALSE,
   visit_occurrence = FALSE,
-  condition_occurrence = TRUE,
-  observation = TRUE,
-  drug_exposure = TRUE,
-  procedure_occurrence = TRUE,
-  device_exposure = TRUE,
-  measurement = TRUE,
+  condition_occurrence = FALSE,
+  observation = FALSE,
+  drug_exposure = FALSE,
+  procedure_occurrence = FALSE,
+  device_exposure = FALSE,
+  measurement = FALSE,
   payer_plan_period = FALSE,
   cost = FALSE,
   

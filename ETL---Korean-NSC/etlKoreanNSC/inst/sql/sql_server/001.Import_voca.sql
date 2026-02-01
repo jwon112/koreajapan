@@ -79,3 +79,41 @@ WITH (FIRSTROW = 2, FIELDTERMINATOR = '\t', ROWTERMINATOR = '0x0a', CODEPAGE = '
 TRUNCATE TABLE RELATIONSHIP;
 BULK INSERT RELATIONSHIP FROM '@vocaFolder\RELATIONSHIP.csv' 
 WITH (FIRSTROW = 2, FIELDTERMINATOR = '\t', ROWTERMINATOR = '0x0a', CODEPAGE = '65001', TABLOCK);
+
+-- 10. SOURCE_TO_CONCEPT_MAP (from CONCEPT_RELATIONSHIP "Maps to" + CONCEPT)
+-- Deprecated in CDM v5 but still used by this ETL; populated from vocabulary so ETL can join by source_code + domain_id.
+TRUNCATE TABLE source_to_concept_map;
+INSERT INTO source_to_concept_map (
+  source_code,
+  source_concept_id,
+  source_vocabulary_id,
+  source_code_description,
+  target_concept_id,
+  target_vocabulary_id,
+  valid_start_date,
+  valid_end_date,
+  invalid_reason,
+  domain_id
+)
+SELECT
+  c1.concept_code,
+  c1.concept_id,
+  c1.vocabulary_id,
+  c1.concept_name,
+  c2.concept_id,
+  c2.vocabulary_id,
+  cr.valid_start_date,
+  cr.valid_end_date,
+  cr.invalid_reason,
+  c2.domain_id
+FROM CONCEPT c1
+JOIN CONCEPT_RELATIONSHIP cr
+  ON c1.concept_id = cr.concept_id_1
+ AND cr.relationship_id = 'Maps to'
+ AND (cr.invalid_reason IS NULL OR cr.invalid_reason = '')
+JOIN CONCEPT c2
+  ON cr.concept_id_2 = c2.concept_id
+ AND (c2.invalid_reason IS NULL OR c2.invalid_reason = '')
+ AND c2.domain_id IS NOT NULL
+WHERE c1.concept_code IS NOT NULL
+  AND c1.vocabulary_id IS NOT NULL;

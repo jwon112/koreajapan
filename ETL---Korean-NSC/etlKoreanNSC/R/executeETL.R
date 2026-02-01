@@ -121,11 +121,12 @@ executeNHISETL <- function(NHISNSC_rawdata,
     if(import_voca) {
         SqlFile <- "001.Import_voca.sql"
         ParallelLogger::logInfo("Importing Vocabulary data...")
-        
+        # USE는 데이터베이스 이름만 허용하므로 "db.schema"에서 db만 전달
+        Mapping_db_name <- sub("\\..*", "", Mapping_database)
         sql <- SqlRender::loadRenderTranslateSql(SqlFile,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
-                                                 Mapping_database = Mapping_database,
+                                                 Mapping_database = Mapping_db_name,
                                                  vocaFolder = vocaFolder) # SQL의 @vocaFolder와 매핑
         
         DatabaseConnector::executeSql(connection = connection, sql)

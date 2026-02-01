@@ -132,7 +132,8 @@ CREATE TABLE source_to_concept_map (
   target_vocabulary_id		VARCHAR(20)		NOT NULL,
   valid_start_date			  DATE			    NOT NULL,
   valid_end_date			    DATE			    NOT NULL,
-  invalid_reason			    VARCHAR(1)		NULL
+  invalid_reason			    VARCHAR(1)		NULL,
+  domain_id				        VARCHAR(20)		NOT NULL
 )
 ;
 
