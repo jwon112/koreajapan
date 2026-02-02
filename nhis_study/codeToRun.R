@@ -58,8 +58,8 @@ executeNHISETL(
   # --- 실행 단계 제어 (TRUE/FALSE) ---
   # 처음 돌릴 때는 CDM_ddl = TRUE로 테이블을 만들어야 합니다.
   CDM_ddl = FALSE,              # CDM 빈 테이블 생성
-  master_table = FALSE,         # 마스터 시퀀스 테이블 생성
-  import_voca = TRUE,
+  master_table = TRUE,         # 마스터 시퀀스 테이블 생성
+  import_voca = FALSE,
   
   # 데이터 적재 (필요한 부분만 TRUE로 변경 가능)
   location = FALSE,
@@ -85,6 +85,29 @@ executeNHISETL(
   constraints = FALSE,          # 제약조건 생성 (필수)
   data_cleansing = FALSE       # 데이터 클렌징 (선택 사항)
 )
+
+
+DQevaluation(
+  NHISNSC_rawdata = "nhisnsc2013original.dbo",
+  NHISNSC_database = "nhisnsc2013cdm.dbo",
+  Mapping_database = "nhisnsc2013cdm.dbo",
+  NHIS_JK = nhis_tables$JK,
+  NHIS_20T = nhis_tables$T20,
+  NHIS_30T = nhis_tables$T30,
+  NHIS_40T = nhis_tables$T40,
+  NHIS_60T = nhis_tables$T60,
+  NHIS_GJ = nhis_tables$GJ,
+  NHIS_YK = nhis_tables$YK,
+  connection = conn,
+  outputFolder = "C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/ETL_Logs",
+  drug_exposure = TRUE,
+  procedure_occurrence = TRUE,
+  device_exposure = TRUE,
+  condition_occurrence = TRUE,
+  measurement = TRUE
+)
+
+
 
 # 7. 연결 종료
 disconnect(conn)
