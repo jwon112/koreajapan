@@ -2,6 +2,41 @@ DBMS:
 sql server
 
 Error:
-java.lang.NullPointerException
+com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.gj_vertical'이(가) 유효하지 않습니다.
 
 SQL:
+
+                              SELECT Count(*) as COUNT -- 29,145,003
+                              FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
+                              FROM   nhisnsc2013original.dbo.gj_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
+                              #measurement_mapping b 
+                              where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
+                              AND Isnull(a.meas_value, '0') >= Isnull(Cast(b.answer AS CHAR), '0')) c, --  33,858,848 -> 1:1 mapping
+                              nhisnsc2013original.dbo.NHID_GJ d 
+                              where  c.person_id = Cast(d.person_id AS CHAR) 
+                              AND c.hchk_year = d.hchk_year 
+                              AND c.meas_value != '' 
+                              AND Substring(c.meas_type, 1, 30) IN ( 
+                              'HEIGHT', 'WEIGHT', 'WAIST', 'BP_HIGH', 'BP_LWST', 'BLDS', 'TOT_CHOLE', 'TRIGLYCERIDE', 
+                              'HDL_CHOLE', 'LDL_CHOLE', 'HMG', 'OLIG_PH', 'CREATININE', 'SGOT_AST', 'SGPT_ALT', 'GAMMA_GTP' ) 
+                              
+
+R version:
+R version 4.5.2 (2025-10-31 ucrt)
+
+Platform:
+x86_64-w64-mingw32
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- utils
+- datasets
+- methods
+- base
+
+Other attached packages:
+- etlKoreanNSC (0.9.0)
+- SqlRender (1.19.4)
+- DatabaseConnector (7.0.0)

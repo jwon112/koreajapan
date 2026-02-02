@@ -4,9 +4,11 @@
 #' @param NHISNSC_database CDM 스키마 (seq_master 등)
 #' @param Mapping_database 매핑 테이블 스키마 (source_to_concept_map)
 #' @param NHIS_JK,NHIS_20T,NHIS_30T,NHIS_40T,NHIS_60T,NHIS_GJ,NHIS_YK 원본 테이블명
+#' @param GJ_vertical GJ UNPIVOT 뷰/테이블명 (090.Observation.sql에서 생성, 없으면 measurement=FALSE로 두거나 해당 테이블 생성 후 전달)
 #' @param connection DB 연결 객체
 #' @param outputFolder 로그 경로
 #' @param drug_exposure,procedure_occurrence,device_exposure,condition_occurrence,measurement 도메인별 검수 여부
+#' @return 도메인별 매핑/비매핑 건수 등이 담긴 리스트 (콘솔에 요약 출력 후 invisible 반환)
 #' @export
 DQevaluation <- function(NHISNSC_rawdata,
                          NHISNSC_database,
@@ -18,6 +20,7 @@ DQevaluation <- function(NHISNSC_rawdata,
                          NHIS_60T,
                          NHIS_GJ,
                          NHIS_YK,
+                         GJ_vertical = "gj_vertical",
                          
                          connection,
                          outputFolder,
@@ -40,8 +43,11 @@ DQevaluation <- function(NHISNSC_rawdata,
         NHIS_40T = NHIS_40T,
         NHIS_60T = NHIS_60T,
         NHIS_GJ = NHIS_GJ,
-        NHIS_YK = NHIS_YK
+        NHIS_YK = NHIS_YK,
+        GJ_vertical = GJ_vertical
     )
+    
+    DQresults <- list()
     
     ## Drug_exposure
     if(drug_exposure){
@@ -129,7 +135,9 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToDrugBy30T_1), renderParams))
         HowManyContainDrugByMappied30T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToDrugBy30T_2), renderParams))
-        HowManyContainDrugByMappied30T <- rbind(HowManyContainDrugByMappied30T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainDrugByMappied30T)
+        HowManyContainDrugByMappied30T <- rbind(HowManyContainDrugByMappied30T, tmp)
         
         
         ## 60T Mappied
@@ -198,14 +206,18 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToDrugBy60T_1), renderParams))
         HowManyContainDrugByMappied60T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToDrugBy60T_2), renderParams))
-        HowManyContainDrugByMappied60T <- rbind(HowManyContainDrugByMappied60T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainDrugByMappied60T)
+        HowManyContainDrugByMappied60T <- rbind(HowManyContainDrugByMappied60T, tmp)
         
-        # DrugExposureDQ <- list()
-        # DrugExposureDQ[[1]] <- c(ConvertedDrugCountByMappied30T, ConvertedDrugCountByUnMappied30T)
-        # DrugExposureDQ[[2]] <- c(ConvertedDrugCountByMappied60T, ConvertedDrugCountByUnMappied60T)
-        # DrugExposureDQ[[3]] <- c(HowManyContainDrugByMappied30T)
-        # DrugExposureDQ[[4]] <- c(HowManyContainDrugByMappied60T)
-        # DrugExposureDQ
+        DQresults$drug_exposure <- list(
+            Mapped_30T = ConvertedDrugCountByMappied30T,
+            Unmapped_30T = ConvertedDrugCountByUnMappied30T,
+            Mapped_60T = ConvertedDrugCountByMappied60T,
+            Unmapped_60T = ConvertedDrugCountByUnMappied60T,
+            Raw_30T = HowManyContainDrugByMappied30T,
+            Raw_60T = HowManyContainDrugByMappied60T
+        )
         
     } ## DrugTable : 20T join으로 인해 4건 차이남, Death기간으로 인해 delete 발생, Cost 적재시 delete 발생
     
@@ -342,9 +354,13 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy30T_1), renderParams))
         HowManyContainProcByMappied30T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy30T_2), renderParams))
-        HowManyContainProcByMappied30T <- rbind(HowManyContainProcByMappied30T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainProcByMappied30T)
+        HowManyContainProcByMappied30T <- rbind(HowManyContainProcByMappied30T, tmp)
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy30T_3), renderParams))
-        HowManyContainProcByMappied30T <- rbind(HowManyContainProcByMappied30T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainProcByMappied30T)
+        HowManyContainProcByMappied30T <- rbind(HowManyContainProcByMappied30T, tmp)
         
         
         ## 60T Mappied
@@ -441,9 +457,24 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy60T_1), renderParams))
         HowManyContainProcByMappied60T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy60T_2), renderParams))
-        HowManyContainProcByMappied60T <- rbind(HowManyContainProcByMappied60T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainProcByMappied60T)
+        HowManyContainProcByMappied60T <- rbind(HowManyContainProcByMappied60T, tmp)
         sql <- do.call(SqlRender::render, c(list(SqlRawToProcBy60T_3), renderParams))
-        HowManyContainProcByMappied60T <- rbind(HowManyContainProcByMappied60T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainProcByMappied60T)
+        HowManyContainProcByMappied60T <- rbind(HowManyContainProcByMappied60T, tmp)
+        
+        DQresults$procedure_occurrence <- list(
+            Mapped_30T = ConvertedProcCountByMappied30T,
+            DupMapped_30T = ConvertedProcCountByDupMappied30T,
+            Unmapped_30T = ConvertedProcCountByUnMappied30T,
+            Mapped_60T = ConvertedProcCountByMappied60T,
+            DupMapped_60T = ConvertedProcCountByDupMappied60T,
+            Unmapped_60T = ConvertedProcCountByUnMappied60T,
+            Raw_30T = HowManyContainProcByMappied30T,
+            Raw_60T = HowManyContainProcByMappied60T
+        )
         
     }
     
@@ -568,7 +599,9 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToDeviBy30T_1), renderParams))
         HowManyContainDeviByMappied30T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToDeviBy30T_2), renderParams))
-        HowManyContainDeviByMappied30T <- rbind(HowManyContainDeviByMappied30T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainDeviByMappied30T)
+        HowManyContainDeviByMappied30T <- rbind(HowManyContainDeviByMappied30T, tmp)
         
         
         ## 60T Mappied
@@ -650,7 +683,9 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToDeviBy60T_1), renderParams))
         HowManyContainDeviByMappied60T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToDeviBy60T_2), renderParams))
-        HowManyContainDeviByMappied60T <- rbind(HowManyContainDeviByMappied60T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainDeviByMappied60T)
+        HowManyContainDeviByMappied60T <- rbind(HowManyContainDeviByMappied60T, tmp)
         
     } ## DeviceTable : 20T join으로 인해 2건 차이남
     
@@ -729,7 +764,15 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlRawToCondiBy40T_1), renderParams))
         HowManyContainCondiByMappied40T <- DatabaseConnector::querySql(connection, sql)
         sql <- do.call(SqlRender::render, c(list(SqlRawToCondiBy40T_2), renderParams))
-        HowManyContainCondiByMappied40T <- rbind(HowManyContainCondiByMappied40T, DatabaseConnector::querySql(connection, sql))
+        tmp <- DatabaseConnector::querySql(connection, sql)
+        names(tmp) <- names(HowManyContainCondiByMappied40T)
+        HowManyContainCondiByMappied40T <- rbind(HowManyContainCondiByMappied40T, tmp)
+        
+        DQresults$condition_occurrence <- list(
+            Mapped_40T = ConvertedCondiCountByMappied30T,
+            Unmapped_40T = ConvertedCondiCountByUnMappied40T,
+            Raw_40T = HowManyContainCondiByMappied40T
+        )
         
     } ## ConditionOccurrenceTable : 20T join으로 인해 3건 차이남, 기간 제거 개수 확인요망
     
@@ -797,7 +840,7 @@ DQevaluation <- function(NHISNSC_rawdata,
         SqlMappiedGJ_num <- c("
                               SELECT Count(*) as COUNT -- 29,145,003
                               FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
-                              FROM   @NHISNSC_rawdata.gj_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
+                              FROM   @NHISNSC_rawdata.@GJ_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
                               #measurement_mapping b 
                               where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
                               AND Isnull(a.meas_value, '0') >= Isnull(Cast(b.answer AS CHAR), '0')) c, --  33,858,848 -> 1:1 mapping
@@ -816,7 +859,7 @@ DQevaluation <- function(NHISNSC_rawdata,
         SqlMappiedGJ_code <- c("
                                SELECT Count(*) as COUNT -- 4,295,448
                                FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
-                               FROM   @NHISNSC_rawdata.gj_vertical a, -- left join 75,298,684, 원래 75,298,684 -> 1:1 mappig
+                               FROM   @NHISNSC_rawdata.@GJ_vertical a, -- left join 75,298,684, 원래 75,298,684 -> 1:1 mappig
                                #measurement_mapping b 
                                where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
                                AND Isnull(a.meas_value, '0') = Isnull(Cast(b.answer AS CHAR), '0')) c, --  -> 1:1 mapping
@@ -829,10 +872,36 @@ DQevaluation <- function(NHISNSC_rawdata,
         sql <- do.call(SqlRender::render, c(list(SqlMappiedGJ_code), renderParams))
         ConvertedMeasuCountByMappiedGJ_code <- DatabaseConnector::querySql(connection, sql)
         
+        DQresults$measurement <- list(
+            Mapped_GJ_numeric = ConvertedMeasuCountByMappiedGJ_num,
+            Mapped_GJ_code = ConvertedMeasuCountByMappiedGJ_code
+        )
         
-    } 
+    }
     
+    ## 결과 요약 출력
+    cat("\n========== DQ Evaluation Results ==========\n")
+    for (nm in names(DQresults)) {
+        cat("\n--- ", nm, " ---\n", sep = "")
+        for (item in names(DQresults[[nm]])) {
+            x <- DQresults[[nm]][[item]]
+            if (is.data.frame(x) && nrow(x) >= 1 && ncol(x) >= 1) {
+                cntcol <- which(tolower(names(x)) %in% c("count", "cnt"))[1]
+                if (!is.na(cntcol) && nrow(x) == 1) {
+                    cat("  ", item, ": ", x[[cntcol]], "\n", sep = "")
+                } else if (nrow(x) <= 10) {
+                    cat("  ", item, ":\n", sep = "")
+                    print(x)
+                } else {
+                    cat("  ", item, ": (", nrow(x), " rows)\n", sep = "")
+                    print(head(x, 5))
+                }
+            } else {
+                print(x)
+            }
+        }
+    }
+    cat("\n============================================\n")
     
-    
-    
+    return(invisible(DQresults))
 }

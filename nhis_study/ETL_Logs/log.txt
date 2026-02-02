@@ -2894,3 +2894,22 @@
 2026-02-01 20:53:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 010.Master_table.sql
 2026-02-01 21:38:04	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 44.3 mins
 2026-02-01 21:38:07	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	SEQ_MASTER was converted.                                          elapsed time : 44.2824501355489 mins                                           total of 138244795 row was converted
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHISNSC_rawdata' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHISNSC_database' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_20T' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_30T' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_40T' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_60T' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_GJ' not found in SQL
+2026-02-02 13:06:18	[Main thread]	WARN	SqlRender		Parameter 'NHIS_YK' not found in SQL
+2026-02-02 13:06:28	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.86 secs
+2026-02-02 13:06:28	[Main thread]	WARN	SqlRender		Parameter 'Mapping_database' not found in SQL
+2026-02-02 13:06:28	[Main thread]	WARN	SqlRender		Parameter 'NHIS_40T' not found in SQL
+2026-02-02 13:06:28	[Main thread]	WARN	SqlRender		Parameter 'NHIS_60T' not found in SQL
+2026-02-02 13:06:28	[Main thread]	WARN	SqlRender		Parameter 'NHIS_GJ' not found in SQL
+2026-02-02 13:06:28	[Main thread]	WARN	SqlRender		Parameter 'NHIS_YK' not found in SQL
+2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'Mapping_database' not found in SQL
+2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_40T' not found in SQL
+2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_60T' not found in SQL
+2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_GJ' not found in SQL
+2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_YK' not found in SQL
