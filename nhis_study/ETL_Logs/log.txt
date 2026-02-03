@@ -2913,3 +2913,49 @@
 2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_60T' not found in SQL
 2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_GJ' not found in SQL
 2026-02-02 13:08:34	[Main thread]	WARN	SqlRender		Parameter 'NHIS_YK' not found in SQL
+2026-02-02 17:17:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 020.Location.sql
+2026-02-02 17:17:47	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.156 secs
+2026-02-02 17:17:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	location was converted.                                          elapsed time : 0.199748039245605 secs                                           total of 312 row was converted
+2026-02-02 17:17:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 030.Care_site.sql
+2026-02-02 17:18:06	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 19 secs
+2026-02-02 17:18:06	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	care_site was converted.                                           elapsed time : 19.0029170513153 secs                                           total of 131401 row was converted
+2026-02-02 17:18:06	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 040.Person.sql
+2026-02-02 17:55:53	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 37.8 mins
+2026-02-02 17:55:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	person was converted.                                           elapsed time : 37.7831245024999 mins                                           total of 1125691 row was converted
+2026-02-02 17:55:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-02 17:56:00	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 6.04 secs
+2026-02-02 17:56:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 6.08108806610107 secs                                           total of 255806 row was converted
+2026-02-02 17:56:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 060.Observation_period.sql
+2026-02-02 17:57:01	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 1.01 mins
+2026-02-02 17:57:01	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	observation_period was converted.                                           elapsed time : 1.01524826685588 mins                                           total of 1256091 row was converted
+2026-02-02 17:57:01	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 070.Visit_occurrence.sql
+2026-02-02 18:06:10	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.15 mins
+2026-02-02 18:06:11	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	visit_occurrence was converted.                                           elapsed time : 9.14826336701711 mins                                           total of 14467249 row was converted
+2026-02-02 18:06:11	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-02 18:29:57	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 23.8 mins
+2026-02-02 18:30:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 23.7660044153531 mins                                           total of 48617923 row was converted
+2026-02-02 18:30:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 18:30:01	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.GJ_VERTICAL'이(가) 유효하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-02 20:25:13	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 20:25:13	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '@NHIS_GJ' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-02 20:32:24	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 20:32:25	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 "WAIST"의 유형이 UNPIVOT 목록에 지정된 다른 열의 유형과 충돌합니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-02 20:36:09	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 20:36:22	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스 'nhisnsc2013original'에서 CREATE TABLE 사용 권한이 거부되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-02 20:41:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 20:41:33	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013cdm.dbo.dbo.GJ_VERTICAL'의 접두사가 최대 개수를 초과했습니다. 최대 개수는 2개입니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-02 20:44:10	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 090.Observation.sql
+2026-02-02 20:53:51	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.68 mins
+2026-02-02 20:53:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	observation was converted.                                          elapsed time : 9.68436523278554 mins                                           total of 33218703 row was converted
+2026-02-02 20:53:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 100.Drug_exposure.sql
+2026-02-02 21:53:22	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 59.5 mins
+2026-02-02 21:53:26	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	drug_exposure was converted.                                          elapsed time : 59.4634960174561 mins                                           total of 92041802 row was converted
+2026-02-02 21:53:26	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-02 22:17:59	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 24.6 mins
+2026-02-02 22:18:02	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	procedure_occurrence was converted.                                          elapsed time : 24.5571932315826 mins                                           total of 45158792 row was converted
+2026-02-02 22:18:02	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 120.Device_exposure.sql
+2026-02-02 22:19:46	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 1.73 mins
+2026-02-02 22:19:46	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	device_exposure was converted.                                          elapsed time : 1.73521073261897 mins                                           total of 1020577 row was converted
+2026-02-02 22:19:46	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 130.Measurement.sql
+2026-02-02 22:19:46	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.GJ_VERTICAL'이(가) 유효하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-03 10:14:18	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 130.Measurement.sql

@@ -50,14 +50,66 @@ CREATE TABLE @NHISNSC_database.OBSERVATION
 	 qualifier_source_value				VARCHAR(50) 				NULL
 	)
 ;
-*/
-	
-/*    
--- Creating Vertical tables
-select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value 
-into @NHISNSC_rawdata.GJ_VERTICAL
-from @NHISNSC_rawdata.@NHIS_GJ
-unpivot (meas_value for meas_type in ( -- 47 GJ items
+*/	
+
+-- Creating Vertical tables (CDM DB에 GJ/JK UNPIVOT 테이블 생성, 원본 DB에는 CREATE 권한 불필요)
+-- UNPIVOT 시 모든 열 타입이 동일해야 하므로 서브쿼리에서 VARCHAR(50)로 통일
+IF OBJECT_ID('@NHISNSC_database.GJ_VERTICAL', 'U') IS NOT NULL DROP TABLE @NHISNSC_database.GJ_VERTICAL;
+select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value
+into @NHISNSC_database.GJ_VERTICAL
+from (
+    select hchk_year, person_id, ykiho_gubun_cd,
+        cast(height as varchar(50)) as height,
+        cast(weight as varchar(50)) as weight,
+        cast(waist as varchar(50)) as waist,
+        cast(bp_high as varchar(50)) as bp_high,
+        cast(bp_lwst as varchar(50)) as bp_lwst,
+        cast(blds as varchar(50)) as blds,
+        cast(tot_chole as varchar(50)) as tot_chole,
+        cast(triglyceride as varchar(50)) as triglyceride,
+        cast(hdl_chole as varchar(50)) as hdl_chole,
+        cast(ldl_chole as varchar(50)) as ldl_chole,
+        cast(hmg as varchar(50)) as hmg,
+        cast(gly_cd as varchar(50)) as gly_cd,
+        cast(olig_occu_cd as varchar(50)) as olig_occu_cd,
+        cast(olig_ph as varchar(50)) as olig_ph,
+        cast(olig_prote_cd as varchar(50)) as olig_prote_cd,
+        cast(creatinine as varchar(50)) as creatinine,
+        cast(sgot_ast as varchar(50)) as sgot_ast,
+        cast(sgpt_alt as varchar(50)) as sgpt_alt,
+        cast(gamma_gtp as varchar(50)) as gamma_gtp,
+        cast(hchk_pmh_cd1 as varchar(50)) as hchk_pmh_cd1,
+        cast(hchk_pmh_cd2 as varchar(50)) as hchk_pmh_cd2,
+        cast(hchk_pmh_cd3 as varchar(50)) as hchk_pmh_cd3,
+        cast(hchk_apop_pmh_yn as varchar(50)) as hchk_apop_pmh_yn,
+        cast(hchk_hdise_pmh_yn as varchar(50)) as hchk_hdise_pmh_yn,
+        cast(hchk_hprts_pmh_yn as varchar(50)) as hchk_hprts_pmh_yn,
+        cast(hchk_diabml_pmh_yn as varchar(50)) as hchk_diabml_pmh_yn,
+        cast(hchk_hplpdm_pmh_yn as varchar(50)) as hchk_hplpdm_pmh_yn,
+        cast(hchk_etcdse_pmh_yn as varchar(50)) as hchk_etcdse_pmh_yn,
+        cast(hchk_phss_pmh_yn as varchar(50)) as hchk_phss_pmh_yn,
+        cast(fmly_liver_dise_patien_yn as varchar(50)) as fmly_liver_dise_patien_yn,
+        cast(fmly_hprts_patien_yn as varchar(50)) as fmly_hprts_patien_yn,
+        cast(fmly_apop_patien_yn as varchar(50)) as fmly_apop_patien_yn,
+        cast(fmly_hdise_patien_yn as varchar(50)) as fmly_hdise_patien_yn,
+        cast(fmly_diabml_patien_yn as varchar(50)) as fmly_diabml_patien_yn,
+        cast(fmly_cancer_patien_yn as varchar(50)) as fmly_cancer_patien_yn,
+        cast(smk_stat_type_rsps_cd as varchar(50)) as smk_stat_type_rsps_cd,
+        cast(smk_term_rsps_cd as varchar(50)) as smk_term_rsps_cd,
+        cast(cur_smk_term_rsps_cd as varchar(50)) as cur_smk_term_rsps_cd,
+        cast(cur_dsqty_rsps_cd as varchar(50)) as cur_dsqty_rsps_cd,
+        cast(past_smk_term_rsps_cd as varchar(50)) as past_smk_term_rsps_cd,
+        cast(past_dsqty_rsps_cd as varchar(50)) as past_dsqty_rsps_cd,
+        cast(dsqty_rsps_cd as varchar(50)) as dsqty_rsps_cd,
+        cast(drnk_habit_rsps_Cd as varchar(50)) as drnk_habit_rsps_Cd,
+        cast(tm1_drkqty_rsps_cd as varchar(50)) as tm1_drkqty_rsps_cd,
+        cast(exerci_freq_rsps_cd as varchar(50)) as exerci_freq_rsps_cd,
+        cast(mov20_wek_freq_id as varchar(50)) as mov20_wek_freq_id,
+        cast(mov30_wek_freq_id as varchar(50)) as mov30_wek_freq_id,
+        cast(wlk30_wek_freq_id as varchar(50)) as wlk30_wek_freq_id
+    from @NHISNSC_rawdata.@NHIS_GJ
+) as src
+unpivot (meas_value for meas_type in (
     height, weight, waist, bp_high, bp_lwst,
     blds, tot_chole, triglyceride, hdl_chole, ldl_chole,
     hmg, gly_cd, olig_occu_cd, olig_ph, olig_prote_cd,
@@ -71,15 +123,18 @@ unpivot (meas_value for meas_type in ( -- 47 GJ items
 )) as unpivortn
 ;
 
-
-select STND_Y as hchk_year, person_id, jk_type, jk_value into @NHISNSC_rawdata.JK_VERTICAL
-from @NHISNSC_rawdata.@NHIS_JK
-unpivot (jk_value for jk_type in ( -- 2 JK items
-        CTRB_PT_TYPE_CD, DFAB_GRD_CD
-)) as unpivortn
+IF OBJECT_ID('@NHISNSC_database.JK_VERTICAL', 'U') IS NOT NULL DROP TABLE @NHISNSC_database.JK_VERTICAL;
+select hchk_year, person_id, jk_type, jk_value
+into @NHISNSC_database.JK_VERTICAL
+from (
+    select STND_Y as hchk_year, person_id,
+        cast(CTRB_PT_TYPE_CD as varchar(50)) as CTRB_PT_TYPE_CD,
+        cast(DFAB_GRD_CD as varchar(50)) as DFAB_GRD_CD
+    from @NHISNSC_rawdata.@NHIS_JK
+) as src
+unpivot (jk_value for jk_type in (CTRB_PT_TYPE_CD, DFAB_GRD_CD)) as unpivortn
 ;
 
-*/
 
 -- observation mapping table(temp)
 CREATE TABLE #observation_mapping
@@ -222,7 +277,7 @@ INSERT INTO @NHISNSC_database.OBSERVATION (observation_id, person_id, observatio
 							and substring(hchk_year, 1, 4) in ('2002', '2003', '2004', '2005', '2006', '2007', '2008') then cast(cast(meas_value as int)-1 as varchar(50))
 				else meas_value
 				end as meas_value 			
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #observation_mapping b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') = isnull(cast(b.answer as char),'0')
@@ -267,7 +322,7 @@ INSERT INTO @NHISNSC_database.OBSERVATION (observation_id, person_id, observatio
 			qualifier_source_Value = null
 
 	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #observation_mapping b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') >= isnull(cast(b.answer as char),'0')
@@ -338,7 +393,7 @@ select		cast(concat(c.master_seq, b.id_value) as bigint) as observation_id,
 			qualifier_source_Value = null
 
 	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #observation_mapping09 b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') >= isnull(cast(b.answer as char),'0')
@@ -377,7 +432,7 @@ INSERT INTO @NHISNSC_database.OBSERVATION (observation_id, person_id, observatio
 			qualifier_source_Value = null
 
 	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #observation_mapping09 b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') = isnull(cast(b.answer as char),'0')
@@ -392,7 +447,7 @@ INSERT INTO @NHISNSC_database.OBSERVATION (observation_id, person_id, observatio
  2. Pivot rows to columns of JK table
  *************************************/
 /*
-select STND_Y as hchk_year, person_id, jk_type, jk_value into @NHISNSC_rawdata.JK_VERTICAL
+select STND_Y as hchk_year, person_id, jk_type, jk_value into @NHISNSC_database.JK_VERTICAL
 from @NHISNSC_rawdata.@NHIS_JK
 unpivot (jk_value for jk_type in ( -- 2 JK variable
         CTRB_PT_TYPE_CD, DFAB_GRD_CD
@@ -424,7 +479,7 @@ select			cast(concat(c.master_seq, b.id_value) as bigint) as observation_id,
 				observation_source_concept_id = null,
 				unit_source_value = null,
 				qualifier_source_Value = null
-	from (select * from @NHISNSC_rawdata.JK_VERTICAL where jk_type='CTRB_PT_TYPE_CD') a
+	from (select * from @NHISNSC_database.JK_VERTICAL where jk_type='CTRB_PT_TYPE_CD') a
 				JOIN #observation_mapping b 
 				on isnull(a.jk_value,'') = isnull(b.answer,'') 
 				JOIN @NHISNSC_database.SEQ_MASTER c
@@ -444,7 +499,7 @@ drop table #observation_mapping09;
 /*
 --------------Before pivot, 29
 select distinct meas_type, count(meas_type)
-from @NHISNSC_rawdata.@GJ_VERTICAL
+from @NHISNSC_database.GJ_VERTICAL
 where meas_value != ''  and substring(meas_type, 1, 30) in ('HCHK_PMH_CD1', 'HCHK_PMH_CD2', 'HCHK_PMH_CD3','HCHK_APOP_PMH_YN', 'HCHK_HDISE_PMH_YN', 'HCHK_HPRTS_PMH_YN', 
 																	'HCHK_DIABML_PMH_YN', 'HCHK_HPLPDM_PMH_YN', 'HCHK_ETCDSE_PMH_YN', 'HCHK_PHSS_PMH_YN', 'FMLY_LIVER_DISE_PATIEN_YN', 'FMLY_HPRTS_PATIEN_YN', 
 																	'FMLY_APOP_PATIEN_YN', 'FMLY_HDISE_PATIEN_YN', 'FMLY_DIABML_PATIEN_YN', 'FMLY_CANCER_PATIEN_YN', 'SMK_STAT_TYPE_RSPS_CD', 'SMK_TERM_RSPS_CD', 

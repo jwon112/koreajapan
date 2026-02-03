@@ -58,7 +58,7 @@ executeNHISETL(
   # --- 실행 단계 제어 (TRUE/FALSE) ---
   # 처음 돌릴 때는 CDM_ddl = TRUE로 테이블을 만들어야 합니다.
   CDM_ddl = FALSE,              # CDM 빈 테이블 생성
-  master_table = TRUE,         # 마스터 시퀀스 테이블 생성
+  master_table = FALSE,         # 마스터 시퀀스 테이블 생성
   import_voca = FALSE,
   
   # 데이터 적재 (필요한 부분만 TRUE로 변경 가능)
@@ -69,13 +69,13 @@ executeNHISETL(
   observation_period = FALSE,
   visit_occurrence = FALSE,
   condition_occurrence = FALSE,
-  observation = FALSE,
-  drug_exposure = FALSE,
-  procedure_occurrence = FALSE,
-  device_exposure = FALSE,
-  measurement = FALSE,
-  payer_plan_period = FALSE,
-  cost = FALSE,
+  observation = TRUE,
+  drug_exposure = TRUE,
+  procedure_occurrence = TRUE,
+  device_exposure = TRUE,
+  measurement = TRUE,
+  payer_plan_period = TRUE,
+  cost = TRUE,
   
   # 후처리
   generateEra = FALSE,          # Era 테이블 생성 (시간 오래 걸림)
@@ -104,7 +104,7 @@ DQevaluation(
   procedure_occurrence = TRUE,
   device_exposure = TRUE,
   condition_occurrence = TRUE,
-  measurement = TRUE
+  measurement = FALSE
 )
 
 

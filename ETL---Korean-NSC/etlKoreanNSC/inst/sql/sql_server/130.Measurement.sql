@@ -145,7 +145,7 @@ INSERT INTO @NHISNSC_database.MEASUREMENT (measurement_id, person_id, measuremen
 			a.meas_value as value_source_value
 
 	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value 			
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #measurement_mapping b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') >= isnull(cast(b.answer as char),'0')
@@ -186,7 +186,7 @@ INSERT INTO @NHISNSC_database.MEASUREMENT (measurement_id, person_id, measuremen
 			a.meas_value as value_source_value
 
 	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value 			
-			from @NHISNSC_rawdata.GJ_VERTICAL) a
+			from @NHISNSC_database.GJ_VERTICAL) a
 		JOIN #measurement_mapping b 
 		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
 			and isnull(a.meas_value,'0') = isnull(cast(b.answer as char),'0')

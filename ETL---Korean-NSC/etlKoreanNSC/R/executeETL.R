@@ -476,7 +476,9 @@ executeNHISETL <- function(NHISNSC_rawdata,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
                                                  NHISNSC_rawdata = NHISNSC_rawdata,
-                                                 NHISNSC_database = NHISNSC_database)
+                                                 NHISNSC_database = NHISNSC_database,
+                                                 NHIS_GJ = NHIS_GJ,
+                                                 NHIS_JK = NHIS_JK)
         
         DatabaseConnector::executeSql(connection = connection, sql)
         
