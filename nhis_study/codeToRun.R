@@ -69,13 +69,13 @@ executeNHISETL(
   observation_period = FALSE,
   visit_occurrence = FALSE,
   condition_occurrence = FALSE,
-  observation = TRUE,
-  drug_exposure = TRUE,
-  procedure_occurrence = TRUE,
-  device_exposure = TRUE,
-  measurement = TRUE,
-  payer_plan_period = TRUE,
-  cost = TRUE,
+  observation = FALSE,
+  drug_exposure = FALSE,
+  procedure_occurrence = FALSE,
+  device_exposure = FALSE,
+  measurement = FALSE,
+  payer_plan_period = FALSE,
+  cost = FALSE,
   
   # 후처리
   generateEra = FALSE,          # Era 테이블 생성 (시간 오래 걸림)
@@ -104,7 +104,7 @@ DQevaluation(
   procedure_occurrence = TRUE,
   device_exposure = TRUE,
   condition_occurrence = TRUE,
-  measurement = FALSE
+  measurement = TRUE
 )
 
 

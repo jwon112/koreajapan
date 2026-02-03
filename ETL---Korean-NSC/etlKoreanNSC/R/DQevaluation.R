@@ -4,7 +4,7 @@
 #' @param NHISNSC_database CDM 스키마 (seq_master 등)
 #' @param Mapping_database 매핑 테이블 스키마 (source_to_concept_map)
 #' @param NHIS_JK,NHIS_20T,NHIS_30T,NHIS_40T,NHIS_60T,NHIS_GJ,NHIS_YK 원본 테이블명
-#' @param GJ_vertical GJ UNPIVOT 뷰/테이블명 (090.Observation.sql에서 생성, 없으면 measurement=FALSE로 두거나 해당 테이블 생성 후 전달)
+#' @param GJ_vertical GJ UNPIVOT 테이블명 (090.Observation.sql에서 CDM DB에 생성됨, 기본값은 소문자 gj_vertical)
 #' @param connection DB 연결 객체
 #' @param outputFolder 로그 경로
 #' @param drug_exposure,procedure_occurrence,device_exposure,condition_occurrence,measurement 도메인별 검수 여부
@@ -840,7 +840,7 @@ DQevaluation <- function(NHISNSC_rawdata,
         SqlMappiedGJ_num <- c("
                               SELECT Count(*) as COUNT -- 29,145,003
                               FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
-                              FROM   @NHISNSC_rawdata.@GJ_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
+                              FROM   @NHISNSC_database.@GJ_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
                               #measurement_mapping b 
                               where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
                               AND Isnull(a.meas_value, '0') >= Isnull(Cast(b.answer AS CHAR), '0')) c, --  33,858,848 -> 1:1 mapping
@@ -859,7 +859,7 @@ DQevaluation <- function(NHISNSC_rawdata,
         SqlMappiedGJ_code <- c("
                                SELECT Count(*) as COUNT -- 4,295,448
                                FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
-                               FROM   @NHISNSC_rawdata.@GJ_vertical a, -- left join 75,298,684, 원래 75,298,684 -> 1:1 mappig
+                               FROM   @NHISNSC_database.@GJ_vertical a, -- left join 75,298,684, 원래 75,298,684 -> 1:1 mappig
                                #measurement_mapping b 
                                where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
                                AND Isnull(a.meas_value, '0') = Isnull(Cast(b.answer AS CHAR), '0')) c, --  -> 1:1 mapping

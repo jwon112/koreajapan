@@ -802,8 +802,8 @@ executeNHISETL <- function(NHISNSC_rawdata,
         sql <- SqlRender::loadRenderTranslateSql(SqlFile,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
-                                                 NHISNSC_database = "NHIS_NSC_v5_3_1",
-                                                 Mapping_database = "NHIS_NSC_new_mapping")
+                                                 NHISNSC_database = NHISNSC_database,
+                                                 Mapping_database = Mapping_database)
         
         DatabaseConnector::executeSql(connection = connection, sql)
         
@@ -834,8 +834,8 @@ executeNHISETL <- function(NHISNSC_rawdata,
         sql <- SqlRender::loadRenderTranslateSql(SqlFile,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
-                                                 NHISNSC_database = "NHIS_NSC_v5_3_1",
-                                                 Mapping_database = "NHIS_NSC_new_mapping")
+                                                 NHISNSC_database = NHISNSC_database,
+                                                 Mapping_database = Mapping_database)
         
         DatabaseConnector::executeSql(connection = connection, sql)
         

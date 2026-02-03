@@ -2,43 +2,24 @@ DBMS:
 sql server
 
 Error:
-com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.GJ_VERTICAL'이(가) 유효하지 않습니다.
+com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.gj_vertical'이(가) 유효하지 않습니다.
 
 SQL:
-INSERT INTO nhisnsc2013cdm.dbo.MEASUREMENT (measurement_id, person_id, measurement_concept_id, measurement_date, measurement_time, measurement_type_concept_id, operator_concept_id, value_as_number, value_as_concept_id,			
-											unit_concept_id, range_low, range_high, provider_id, visit_occurrence_id, measurement_source_value, measurement_source_concept_id, unit_source_value, value_source_value)
 
-
-	select	cast(concat(c.master_seq, b.id_value) as bigint) as measurement_id,
-			a.person_id as person_id,
-			b.measurement_concept_id as measurement_concept_id,
-			cast(CONVERT(VARCHAR, a.hchk_year+'0101', 23)as date) as measurement_date,
-			measurement_time = null,
-			b.measurement_type_concept_id as measurement_type_concept_id,
-			operator_concept_id = null,
-			b.value_as_number as value_as_number,
-			b.value_as_concept_id as value_as_concept_id,
-			b.measurement_unit_concept_id as unit_concept_id ,
-			range_low = null,
-			range_high = null,
-			provider_id = null,
-			c.master_seq as visit_occurrence_id,
-			a.meas_value as measurement_source_value,
-			measurement_source_concept_id =null,
-			unit_source_value = null,
-			a.meas_value as value_source_value
-
-	from (select hchk_year, person_id, ykiho_gubun_cd, meas_type, meas_value 			
-			from nhisnsc2013original.dbo.GJ_VERTICAL) a
-		JOIN #measurement_mapping b 
-		on isnull(a.meas_type,'') = isnull(b.meas_type,'') 
-			and isnull(a.meas_value,'0') = isnull(cast(b.answer as char),'0')
-		JOIN nhisnsc2013cdm.dbo.SEQ_MASTER c
-		on a.person_id = cast(c.person_id as char)
-			and a.hchk_year = c.hchk_year
-	where (a.meas_value != '' and substring(a.meas_type, 1, 30) in ('GLY_CD', 'OLIG_OCCU_CD', 'OLIG_PROTE_CD')
-			and c.source_table like 'GJT')
-
+                              SELECT Count(*) as COUNT -- 29,145,003
+                              FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
+                              FROM   nhisnsc2013original.dbo.gj_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
+                              #measurement_mapping b 
+                              where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
+                              AND Isnull(a.meas_value, '0') >= Isnull(Cast(b.answer AS CHAR), '0')) c, --  33,858,848 -> 1:1 mapping
+                              nhisnsc2013original.dbo.NHID_GJ d 
+                              where  c.person_id = Cast(d.person_id AS CHAR) 
+                              AND c.hchk_year = d.hchk_year 
+                              AND c.meas_value != '' 
+                              AND Substring(c.meas_type, 1, 30) IN ( 
+                              'HEIGHT', 'WEIGHT', 'WAIST', 'BP_HIGH', 'BP_LWST', 'BLDS', 'TOT_CHOLE', 'TRIGLYCERIDE', 
+                              'HDL_CHOLE', 'LDL_CHOLE', 'HMG', 'OLIG_PH', 'CREATININE', 'SGOT_AST', 'SGPT_ALT', 'GAMMA_GTP' ) 
+                              
 
 R version:
 R version 4.5.2 (2025-10-31 ucrt)
