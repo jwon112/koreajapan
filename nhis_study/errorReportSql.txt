@@ -2,24 +2,18 @@ DBMS:
 sql server
 
 Error:
-com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'nhisnsc2013original.dbo.gj_vertical'이(가) 유효하지 않습니다.
+com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.death' 및 인덱스 이름 'xpk_death'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (10000655)입니다.
 
 SQL:
-
-                              SELECT Count(*) as COUNT -- 29,145,003
-                              FROM   (SELECT a.meas_type, meas_value, hchk_year, person_id 
-                              FROM   nhisnsc2013original.dbo.gj_vertical a, -- left join 75,717,081, 원래 75,298,684 -> 1:n mappig
-                              #measurement_mapping b 
-                              where  Isnull(a.meas_type, '') = Isnull(b.meas_type, '') 
-                              AND Isnull(a.meas_value, '0') >= Isnull(Cast(b.answer AS CHAR), '0')) c, --  33,858,848 -> 1:1 mapping
-                              nhisnsc2013original.dbo.NHID_GJ d 
-                              where  c.person_id = Cast(d.person_id AS CHAR) 
-                              AND c.hchk_year = d.hchk_year 
-                              AND c.meas_value != '' 
-                              AND Substring(c.meas_type, 1, 30) IN ( 
-                              'HEIGHT', 'WEIGHT', 'WAIST', 'BP_HIGH', 'BP_LWST', 'BLDS', 'TOT_CHOLE', 'TRIGLYCERIDE', 
-                              'HDL_CHOLE', 'LDL_CHOLE', 'HMG', 'OLIG_PH', 'CREATININE', 'SGOT_AST', 'SGPT_ALT', 'GAMMA_GTP' ) 
-                              
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('death')
+      AND type = 'PK'
+      AND name = 'xpk_death'
+)
+BEGIN
+    ALTER TABLE death ADD CONSTRAINT xpk_death PRIMARY KEY NONCLUSTERED ( person_id ) ;
+END;
 
 R version:
 R version 4.5.2 (2025-10-31 ucrt)

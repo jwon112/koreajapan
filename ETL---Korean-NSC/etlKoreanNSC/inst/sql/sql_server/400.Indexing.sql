@@ -98,33 +98,145 @@ Standardized clinical data
 
 /**PRIMARY KEY NONCLUSTERED constraints**/
 
-ALTER TABLE person ADD CONSTRAINT xpk_person PRIMARY KEY NONCLUSTERED ( person_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('person')
+      AND type = 'PK'
+      AND name = 'xpk_person'
+)
+BEGIN
+    ALTER TABLE person ADD CONSTRAINT xpk_person PRIMARY KEY NONCLUSTERED ( person_id ) ;
+END;
 
-ALTER TABLE observation_period ADD CONSTRAINT xpk_observation_period PRIMARY KEY NONCLUSTERED ( observation_period_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('observation_period')
+      AND type = 'PK'
+      AND name = 'xpk_observation_period'
+)
+BEGIN
+    ALTER TABLE observation_period ADD CONSTRAINT xpk_observation_period PRIMARY KEY NONCLUSTERED ( observation_period_id ) ;
+END;
 
-ALTER TABLE specimen ADD CONSTRAINT xpk_specimen PRIMARY KEY NONCLUSTERED ( specimen_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('specimen')
+      AND type = 'PK'
+      AND name = 'xpk_specimen'
+)
+BEGIN
+    ALTER TABLE specimen ADD CONSTRAINT xpk_specimen PRIMARY KEY NONCLUSTERED ( specimen_id ) ;
+END;
 
-ALTER TABLE death ADD CONSTRAINT xpk_death PRIMARY KEY NONCLUSTERED ( person_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('death')
+      AND type = 'PK'
+      AND name = 'xpk_death'
+)
+BEGIN
+    ALTER TABLE death ADD CONSTRAINT xpk_death PRIMARY KEY NONCLUSTERED ( person_id ) ;
+END;
 
-ALTER TABLE visit_occurrence ADD CONSTRAINT xpk_visit_occurrence PRIMARY KEY NONCLUSTERED ( visit_occurrence_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('visit_occurrence')
+      AND type = 'PK'
+      AND name = 'xpk_visit_occurrence'
+)
+BEGIN
+    ALTER TABLE visit_occurrence ADD CONSTRAINT xpk_visit_occurrence PRIMARY KEY NONCLUSTERED ( visit_occurrence_id ) ;
+END;
 
-ALTER TABLE visit_detail ADD CONSTRAINT xpk_visit_detail PRIMARY KEY NONCLUSTERED ( visit_detail_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('visit_detail')
+      AND type = 'PK'
+      AND name = 'xpk_visit_detail'
+)
+BEGIN
+    ALTER TABLE visit_detail ADD CONSTRAINT xpk_visit_detail PRIMARY KEY NONCLUSTERED ( visit_detail_id ) ;
+END;
 
-ALTER TABLE procedure_occurrence ADD CONSTRAINT xpk_procedure_occurrence PRIMARY KEY NONCLUSTERED ( procedure_occurrence_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('procedure_occurrence')
+      AND type = 'PK'
+      AND name = 'xpk_procedure_occurrence'
+)
+BEGIN
+    ALTER TABLE procedure_occurrence ADD CONSTRAINT xpk_procedure_occurrence PRIMARY KEY NONCLUSTERED ( procedure_occurrence_id ) ;
+END;
 
-ALTER TABLE drug_exposure ADD CONSTRAINT xpk_drug_exposure PRIMARY KEY NONCLUSTERED ( drug_exposure_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('drug_exposure')
+      AND type = 'PK'
+      AND name = 'xpk_drug_exposure'
+)
+BEGIN
+    ALTER TABLE drug_exposure ADD CONSTRAINT xpk_drug_exposure PRIMARY KEY NONCLUSTERED ( drug_exposure_id ) ;
+END;
 
-ALTER TABLE device_exposure ADD CONSTRAINT xpk_device_exposure PRIMARY KEY NONCLUSTERED ( device_exposure_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('device_exposure')
+      AND type = 'PK'
+      AND name = 'xpk_device_exposure'
+)
+BEGIN
+    ALTER TABLE device_exposure ADD CONSTRAINT xpk_device_exposure PRIMARY KEY NONCLUSTERED ( device_exposure_id ) ;
+END;
 
-ALTER TABLE condition_occurrence ADD CONSTRAINT xpk_condition_occurrence PRIMARY KEY NONCLUSTERED ( condition_occurrence_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('condition_occurrence')
+      AND type = 'PK'
+      AND name = 'xpk_condition_occurrence'
+)
+BEGIN
+    ALTER TABLE condition_occurrence ADD CONSTRAINT xpk_condition_occurrence PRIMARY KEY NONCLUSTERED ( condition_occurrence_id ) ;
+END;
 
-ALTER TABLE measurement ADD CONSTRAINT xpk_measurement PRIMARY KEY NONCLUSTERED ( measurement_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('measurement')
+      AND type = 'PK'
+      AND name = 'xpk_measurement'
+)
+BEGIN
+    ALTER TABLE measurement ADD CONSTRAINT xpk_measurement PRIMARY KEY NONCLUSTERED ( measurement_id ) ;
+END;
 
-ALTER TABLE note ADD CONSTRAINT xpk_note PRIMARY KEY NONCLUSTERED ( note_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('note')
+      AND type = 'PK'
+      AND name = 'xpk_note'
+)
+BEGIN
+    ALTER TABLE note ADD CONSTRAINT xpk_note PRIMARY KEY NONCLUSTERED ( note_id ) ;
+END;
 
-ALTER TABLE note_nlp ADD CONSTRAINT xpk_note_nlp PRIMARY KEY NONCLUSTERED ( note_nlp_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('note_nlp')
+      AND type = 'PK'
+      AND name = 'xpk_note_nlp'
+)
+BEGIN
+    ALTER TABLE note_nlp ADD CONSTRAINT xpk_note_nlp PRIMARY KEY NONCLUSTERED ( note_nlp_id ) ;
+END;
 
-ALTER TABLE observation  ADD CONSTRAINT xpk_observation PRIMARY KEY NONCLUSTERED ( observation_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('observation')
+      AND type = 'PK'
+      AND name = 'xpk_observation'
+)
+BEGIN
+    ALTER TABLE observation  ADD CONSTRAINT xpk_observation PRIMARY KEY NONCLUSTERED ( observation_id ) ;
+END;
 
 
 
@@ -136,11 +248,35 @@ Standardized health system data
 ************************/
 
 
-ALTER TABLE location ADD CONSTRAINT xpk_location PRIMARY KEY NONCLUSTERED ( location_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('location')
+      AND type = 'PK'
+      AND name = 'xpk_location'
+)
+BEGIN
+    ALTER TABLE location ADD CONSTRAINT xpk_location PRIMARY KEY NONCLUSTERED ( location_id ) ;
+END;
 
-ALTER TABLE care_site ADD CONSTRAINT xpk_care_site PRIMARY KEY NONCLUSTERED ( care_site_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('care_site')
+      AND type = 'PK'
+      AND name = 'xpk_care_site'
+)
+BEGIN
+    ALTER TABLE care_site ADD CONSTRAINT xpk_care_site PRIMARY KEY NONCLUSTERED ( care_site_id ) ;
+END;
 
-ALTER TABLE provider ADD CONSTRAINT xpk_provider PRIMARY KEY NONCLUSTERED ( provider_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('provider')
+      AND type = 'PK'
+      AND name = 'xpk_provider'
+)
+BEGIN
+    ALTER TABLE provider ADD CONSTRAINT xpk_provider PRIMARY KEY NONCLUSTERED ( provider_id ) ;
+END;
 
 
 
@@ -151,9 +287,25 @@ Standardized health economics
 ************************/
 
 
-ALTER TABLE payer_plan_period ADD CONSTRAINT xpk_payer_plan_period PRIMARY KEY NONCLUSTERED ( payer_plan_period_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('payer_plan_period')
+      AND type = 'PK'
+      AND name = 'xpk_payer_plan_period'
+)
+BEGIN
+    ALTER TABLE payer_plan_period ADD CONSTRAINT xpk_payer_plan_period PRIMARY KEY NONCLUSTERED ( payer_plan_period_id ) ;
+END;
 
-ALTER TABLE cost ADD CONSTRAINT xpk_visit_cost PRIMARY KEY NONCLUSTERED ( cost_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('cost')
+      AND type = 'PK'
+      AND name = 'xpk_visit_cost'
+)
+BEGIN
+    ALTER TABLE cost ADD CONSTRAINT xpk_visit_cost PRIMARY KEY NONCLUSTERED ( cost_id ) ;
+END;
 
 
 /************************
@@ -162,16 +314,56 @@ Standardized derived elements
 
 ************************/
 
-ALTER TABLE cohort ADD CONSTRAINT xpk_cohort PRIMARY KEY NONCLUSTERED ( cohort_definition_id, subject_id, cohort_start_date, cohort_end_date  ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('cohort')
+      AND type = 'PK'
+      AND name = 'xpk_cohort'
+)
+BEGIN
+    ALTER TABLE cohort ADD CONSTRAINT xpk_cohort PRIMARY KEY NONCLUSTERED ( cohort_definition_id, subject_id, cohort_start_date, cohort_end_date  ) ;
+END;
 
-ALTER TABLE cohort_attribute ADD CONSTRAINT xpk_cohort_attribute PRIMARY KEY NONCLUSTERED ( cohort_definition_id, subject_id, cohort_start_date, cohort_end_date, attribute_definition_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('cohort_attribute')
+      AND type = 'PK'
+      AND name = 'xpk_cohort_attribute'
+)
+BEGIN
+    ALTER TABLE cohort_attribute ADD CONSTRAINT xpk_cohort_attribute PRIMARY KEY NONCLUSTERED ( cohort_definition_id, subject_id, cohort_start_date, cohort_end_date, attribute_definition_id ) ;
+END;
 
 
-ALTER TABLE drug_era ADD CONSTRAINT xpk_drug_era PRIMARY KEY NONCLUSTERED ( drug_era_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('drug_era')
+      AND type = 'PK'
+      AND name = 'xpk_drug_era'
+)
+BEGIN
+    ALTER TABLE drug_era ADD CONSTRAINT xpk_drug_era PRIMARY KEY NONCLUSTERED ( drug_era_id ) ;
+END;
 
-ALTER TABLE dose_era  ADD CONSTRAINT xpk_dose_era PRIMARY KEY NONCLUSTERED ( dose_era_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('dose_era')
+      AND type = 'PK'
+      AND name = 'xpk_dose_era'
+)
+BEGIN
+    ALTER TABLE dose_era  ADD CONSTRAINT xpk_dose_era PRIMARY KEY NONCLUSTERED ( dose_era_id ) ;
+END;
 
-ALTER TABLE condition_era ADD CONSTRAINT xpk_condition_era PRIMARY KEY NONCLUSTERED ( condition_era_id ) ;
+IF NOT EXISTS (
+    SELECT 1 FROM sys.key_constraints
+    WHERE parent_object_id = OBJECT_ID('condition_era')
+      AND type = 'PK'
+      AND name = 'xpk_condition_era'
+)
+BEGIN
+    ALTER TABLE condition_era ADD CONSTRAINT xpk_condition_era PRIMARY KEY NONCLUSTERED ( condition_era_id ) ;
+END;
 
 
 /************************

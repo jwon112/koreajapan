@@ -151,24 +151,26 @@ executeNHISETL <- function(NHISNSC_rawdata,
         cdm_etl_reference <- 'https://github.com/OHDSI/ETL---Korean-NSC'
         cdm_release_date <- Sys.Date()
         cdm_version <- 'v5.3.1'
-        vocabulary_version <- DatabaseConnector::querySql(connection,sql)
-        
-        tb <- data.frame(cdm_source_name, cdm_source_abbreviation, cdm_holder, source_description,
-                         source_documentation_reference, cdm_etl_reference,
-                         cdm_release_date, cdm_version, vocabulary_version)
-        
-        colnames(tb) <- c("cdm_source_name", "cdm_source_abbreviation", "cdm_holder", "source_description",
-                          "source_documentation_reference", "cdm_etl_reference",
-                          "cdm_release_date", "cdm_version", "vocabulary_version")
-        
-        DatabaseConnector::insertTable(connection = connection,
-                                       tableName = "CDM_SOURCE",
-                                       data = tb,
-                                       dropTableIfExists = FALSE,
-                                       createTable = FALSE,
-                                       tempTable = FALSE,
-                                       useMppBulkLoad = FALSE)
-        ParallelLogger::logInfo(paste("ETL",SqlFile, " was completed"))
+        vocabulary_version <- DatabaseConnector::querySql(connection, sql)
+        vocab_ver <- as.character(vocabulary_version[1, 1])
+        cdm_release_date_str <- format(cdm_release_date, "%Y-%m-%d")
+        esc <- function(x) gsub("'", "''", as.character(x), fixed = TRUE)
+        vocab_sql <- if (is.na(vocab_ver) || identical(vocab_ver, "")) "NULL" else paste0("'", esc(vocab_ver), "'")
+        insertSql <- "INSERT INTO @NHISNSC_database.CDM_SOURCE (cdm_source_name, cdm_source_abbreviation, cdm_holder, source_description, source_documentation_reference, cdm_etl_reference, cdm_release_date, cdm_version, vocabulary_version) VALUES ('@cdm_source_name', '@cdm_source_abbreviation', '@cdm_holder', '@source_description', '@source_documentation_reference', '@cdm_etl_reference', '@cdm_release_date', '@cdm_version', @vocabulary_version)"
+        insertSql <- SqlRender::render(insertSql,
+                                     NHISNSC_database = NHISNSC_database,
+                                     cdm_source_name = esc(cdm_source_name),
+                                     cdm_source_abbreviation = esc(cdm_source_abbreviation),
+                                     cdm_holder = esc(cdm_holder),
+                                     source_description = esc(source_description),
+                                     source_documentation_reference = esc(source_documentation_reference),
+                                     cdm_etl_reference = esc(cdm_etl_reference),
+                                     cdm_release_date = cdm_release_date_str,
+                                     cdm_version = esc(cdm_version),
+                                     vocabulary_version = vocab_sql)
+        insertSql <- SqlRender::translate(insertSql, targetDialect = attr(connection, "dbms"))
+        DatabaseConnector::executeSql(connection = connection, insertSql)
+        ParallelLogger::logInfo(paste("ETL", SqlFile, " was completed"))
         
     }
     
@@ -799,11 +801,13 @@ executeNHISETL <- function(NHISNSC_rawdata,
         ##table <- ""
         startTime <- Sys.time()
         
+        # Indexing SQL은 데이터베이스 이름만 필요하므로 "db.schema"에서 db만 추출
+        NHISNSC_database_use <- strsplit(NHISNSC_database, "\\.", fixed = FALSE)[[1]][1]
+        
         sql <- SqlRender::loadRenderTranslateSql(SqlFile,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
-                                                 NHISNSC_database = NHISNSC_database,
-                                                 Mapping_database = Mapping_database)
+                                                 NHISNSC_database = NHISNSC_database_use)
         
         DatabaseConnector::executeSql(connection = connection, sql)
         
@@ -831,11 +835,15 @@ executeNHISETL <- function(NHISNSC_rawdata,
         ##table <- ""
         startTime <- Sys.time()
         
+        # Constraints도 데이터베이스 이름만 필요 (db.schema → db)
+        NHISNSC_database_use <- strsplit(NHISNSC_database, "\\.", fixed = FALSE)[[1]][1]
+        Mapping_database_use <- strsplit(Mapping_database, "\\.", fixed = FALSE)[[1]][1]
+        
         sql <- SqlRender::loadRenderTranslateSql(SqlFile,
                                                  packageName = "etlKoreanNSC",
                                                  dbms = connectionDetails$dbms,
-                                                 NHISNSC_database = NHISNSC_database,
-                                                 Mapping_database = Mapping_database)
+                                                 NHISNSC_database = NHISNSC_database_use,
+                                                 Mapping_database = Mapping_database_use)
         
         DatabaseConnector::executeSql(connection = connection, sql)
         

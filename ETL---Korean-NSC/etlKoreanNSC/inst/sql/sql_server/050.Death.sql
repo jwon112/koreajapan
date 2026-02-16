@@ -99,29 +99,39 @@ insert into #DEATH_MAPPINGTABLE (source_code, target_concept_id, source_code_des
 -- Define the last date of death month as death date
 INSERT INTO @NHISNSC_database.DEATH (person_id, death_date, death_type_concept_id, cause_concept_id, 
 cause_source_value, cause_source_concept_id)
-SELECT a.person_id AS PERSON_ID,
-	convert(varchar, DATEADD(DAY,-DATEPART(DD,DATEADD(MONTH,1,convert(VARCHAR, a.dth_ym + '01' ,23))),DATEADD(MONTH,1,convert(VARCHAR, a.dth_ym + '01' ,23))), 23) AS DEATH_DATE,
-	38003618 as death_type_concept_id,
-	b.target_concept_id as cause_concept_id,
-	dth_code1 as cause_source_value,
-	NULL as cause_source_concept_id
-FROM @NHISNSC_rawdata.@NHIS_JK a left join #DEATH_MAPPINGTABLE b
-on a.dth_code1=b.source_code
-WHERE a.dth_ym IS NOT NULL and a.dth_ym != ''
+SELECT person_id, death_date, death_type_concept_id, cause_concept_id, cause_source_value, cause_source_concept_id
+FROM (
+	SELECT a.person_id AS PERSON_ID,
+		convert(varchar, DATEADD(DAY,-DATEPART(DD,DATEADD(MONTH,1,convert(VARCHAR, a.dth_ym + '01' ,23))),DATEADD(MONTH,1,convert(VARCHAR, a.dth_ym + '01' ,23))), 23) AS DEATH_DATE,
+		38003618 as death_type_concept_id,
+		b.target_concept_id as cause_concept_id,
+		dth_code1 as cause_source_value,
+		NULL as cause_source_concept_id,
+		ROW_NUMBER() OVER (PARTITION BY a.person_id ORDER BY a.STND_Y DESC, a.dth_ym DESC) AS rn
+	FROM @NHISNSC_rawdata.@NHIS_JK a left join #DEATH_MAPPINGTABLE b
+	on a.dth_code1=b.source_code
+	WHERE a.dth_ym IS NOT NULL and a.dth_ym != ''
+) t
+WHERE rn = 1
 ;
 
 -- If there is no death month, define 12.31 as death month and date 
 INSERT INTO @NHISNSC_database.DEATH (person_id, death_date, death_type_concept_id, cause_concept_id, 
 cause_source_value, cause_source_concept_id)
-SELECT a.person_id AS PERSON_ID,
-	convert(VARCHAR, STND_Y + '1231' ,23) AS DEATH_DATE,
-	38003618 as death_type_concept_id,
-	b.target_concept_id as cause_concept_id,
-	dth_code1 as cause_source_value,
-	NULL as cause_source_concept_id
-FROM @NHISNSC_rawdata.@NHIS_JK a left join #DEATH_MAPPINGTABLE b
-on a.dth_code1=b.source_code
-WHERE a.dth_ym = '' and a.DTH_CODE1 != ''
+SELECT person_id, death_date, death_type_concept_id, cause_concept_id, cause_source_value, cause_source_concept_id
+FROM (
+	SELECT a.person_id AS PERSON_ID,
+		convert(VARCHAR, STND_Y + '1231' ,23) AS DEATH_DATE,
+		38003618 as death_type_concept_id,
+		b.target_concept_id as cause_concept_id,
+		dth_code1 as cause_source_value,
+		NULL as cause_source_concept_id,
+		ROW_NUMBER() OVER (PARTITION BY a.person_id ORDER BY a.STND_Y DESC) AS rn
+	FROM @NHISNSC_rawdata.@NHIS_JK a left join #DEATH_MAPPINGTABLE b
+	on a.dth_code1=b.source_code
+	WHERE a.dth_ym = '' and a.DTH_CODE1 != ''
+) t
+WHERE rn = 1
 ;
 
 --Delete temp death mapping table

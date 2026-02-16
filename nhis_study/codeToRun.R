@@ -68,14 +68,14 @@ executeNHISETL(
   death = FALSE,
   observation_period = FALSE,
   visit_occurrence = FALSE,
-  condition_occurrence = FALSE,
+  condition_occurrence = TRUE,
   observation = FALSE,
   drug_exposure = FALSE,
   procedure_occurrence = FALSE,
   device_exposure = FALSE,
   measurement = FALSE,
-  payer_plan_period = FALSE,
-  cost = FALSE,
+  payer_plan_period = TRUE,
+  cost = TRUE,
   
   # 후처리
   generateEra = FALSE,          # Era 테이블 생성 (시간 오래 걸림)

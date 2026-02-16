@@ -3226,3 +3226,161 @@
 2026-02-03 15:14:19	[Main thread]	WARN	SqlRender		Parameter 'NHIS_GJ' not found in SQL
 2026-02-03 15:14:19	[Main thread]	WARN	SqlRender		Parameter 'NHIS_YK' not found in SQL
 2026-02-03 15:14:19	[Main thread]	WARN	SqlRender		Parameter 'GJ_vertical' not found in SQL
+2026-02-04 13:05:56	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-04 13:06:02	[Main thread]	WARN	DatabaseConnector	insertTable.DatabaseConnectorJdbcConnection	The 'useMppBulkLoad' argument is deprecated. Use 'bulkLoad' instead. [90mThis warning is displayed once every 8 hours.[39m
+2026-02-04 13:06:02	[Main thread]	FATAL	rJava	.jcheck	java.sql.BatchUpdateException: 개체 이름 'CDM_SOURCE'이(가) 유효하지 않습니다.
+2026-02-04 13:10:20	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-04 13:10:21	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.024 secs
+2026-02-04 13:10:21	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-04 13:10:21	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 300.GenerateEra.sql
+2026-02-04 13:19:49	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 저장 한도가 부족하거나 데이터베이스 파일이 허용되는 최대 크기에 도달하여 'TEMPDB' 파일 그룹이 꽉 찼기 때문에 'DEFAULT' 데이터베이스에 새 페이지를 할당할 수 없습니다. 무제한 파일은 여전히 16TB로 제한됩니다. 파일 그룹에 개체를 삭제하거나, 파일 그룹에 파일을 더 추가하거나, 파일 그룹의 기존 파일에 대해 자동 증가를 설정하여 필요한 공간을 확보하세요. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:02:55	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:02:55	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:02:56	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: The connection is broken and recovery is not possible. The connection is marked by the server as unrecoverable. No attempt was made to restore the connection. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:02:56	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: The connection is broken and recovery is not possible. The connection is marked by the server as unrecoverable. No attempt was made to restore the connection. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:03:25	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-02-05 16:03:25	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-02-05 16:14:27	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-02-05 16:14:27	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-02-05 16:14:36	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:14:36	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:14:36	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:14:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0215 secs
+2026-02-05 16:14:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0215 secs
+2026-02-05 16:14:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0215 secs
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:14:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:20:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.99 mins
+2026-02-05 16:20:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.99 mins
+2026-02-05 16:20:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.99 mins
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.99396045207977 mins                                           total of 39012381 row was converted
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.99396045207977 mins                                           total of 39012381 row was converted
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.99396045207977 mins                                           total of 39012381 row was converted
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-05 16:20:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-05 16:20:39	[Main thread]	WARN	SqlRender	render	Parameter 'Mapping_database' not found in SQL
+2026-02-05 16:20:39	[Main thread]	WARN	SqlRender	render	Parameter 'Mapping_database' not found in SQL
+2026-02-05 16:20:39	[Main thread]	WARN	SqlRender	render	Parameter 'Mapping_database' not found in SQL
+2026-02-05 16:20:40	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '.' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:20:40	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '.' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:20:40	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '.' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:29:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:29:01	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0128 secs
+2026-02-05 16:29:01	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:29:01	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:29:42	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:29:42	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-05 16:29:43	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.00647 secs
+2026-02-05 16:29:43	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.00647 secs
+2026-02-05 16:29:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:29:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-05 16:29:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:29:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-05 16:34:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.17 mins
+2026-02-05 16:34:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.17 mins
+2026-02-05 16:34:56	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.1721502661705 mins                                           total of 78024762 row was converted
+2026-02-05 16:34:56	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.1721502661705 mins                                           total of 78024762 row was converted
+2026-02-05 16:34:56	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-05 16:34:56	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-05 16:34:56	[Main thread]	WARN	SqlRender	render	Parameter 'Mapping_database' not found in SQL
+2026-02-05 16:34:56	[Main thread]	WARN	SqlRender	render	Parameter 'Mapping_database' not found in SQL
+2026-02-05 16:34:56	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '.' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-05 16:34:56	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: '.' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 19:48:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-09 19:48:45	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.014 secs
+2026-02-09 19:48:45	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-09 19:48:45	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-09 19:53:52	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.11 mins
+2026-02-09 19:53:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.10829338232676 mins                                           total of 39012381 row was converted
+2026-02-09 19:53:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-09 19:53:55	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.death' 및 인덱스 이름 'xpk_death'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (10000655)입니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 21:32:08	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-09 21:32:08	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-09 21:32:13	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 4.98 secs
+2026-02-09 21:32:13	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 4.98 secs
+2026-02-09 21:32:13	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 5.13855004310608 secs                                           total of 255806 row was converted
+2026-02-09 21:32:13	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 5.13855004310608 secs                                           total of 255806 row was converted
+2026-02-09 21:32:13	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-09 21:32:13	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-09 21:47:41	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 15.5 mins
+2026-02-09 21:47:41	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 15.5 mins
+2026-02-09 21:47:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 15.4563155968984 mins                                           total of 48617923 row was converted
+2026-02-09 21:47:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 15.4563155968984 mins                                           total of 48617923 row was converted
+2026-02-09 21:47:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 21:47:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 21:48:36	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 53.7 secs
+2026-02-09 21:48:36	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 53.7 secs
+2026-02-09 21:48:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 53.7243790626526 secs                                           total of 13536298 row was converted
+2026-02-09 21:48:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 53.7243790626526 secs                                           total of 13536298 row was converted
+2026-02-09 21:48:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-09 21:48:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-09 22:21:14	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 32.6 mins
+2026-02-09 22:21:14	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 32.6 mins
+2026-02-09 22:21:18	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 32.6083519498507 mins                                           total of 64927815 row was converted
+2026-02-09 22:21:18	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 32.6083519498507 mins                                           total of 64927815 row was converted
+2026-02-09 22:30:51	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-09 22:30:51	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-09 22:30:51	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql
+2026-02-09 22:30:52	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0175 secs
+2026-02-09 22:30:52	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0175 secs
+2026-02-09 22:30:52	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 0.0175 secs
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 320.CDM_source.sql  was completed
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-09 22:30:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 310.Dose_era.sql
+2026-02-09 22:35:53	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.01 mins
+2026-02-09 22:35:53	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.01 mins
+2026-02-09 22:35:53	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.01 mins
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.00762501557668 mins                                           total of 39012381 row was converted
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.00762501557668 mins                                           total of 39012381 row was converted
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	dose_era was converted.                                          elapsed time : 5.00762501557668 mins                                           total of 39012381 row was converted
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-09 22:35:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-09 22:35:53	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'person'에 이미 기본 키가 정의되어 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 22:35:53	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'person'에 이미 기본 키가 정의되어 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 22:35:53	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'person'에 이미 기본 키가 정의되어 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 22:48:09	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-09 22:48:10	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.death' 및 인덱스 이름 'xpk_death'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (10000655)입니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-09 23:11:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-09 23:11:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-09 23:11:39	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.28 secs
+2026-02-09 23:11:39	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.28 secs
+2026-02-09 23:11:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 5.32339000701904 secs                                           total of 255806 row was converted
+2026-02-09 23:11:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 5.32339000701904 secs                                           total of 255806 row was converted
+2026-02-09 23:11:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 23:11:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 23:13:29	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 050.Death.sql
+2026-02-09 23:13:35	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.73 secs
+2026-02-09 23:13:35	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	death was converted.                                           elapsed time : 5.77049899101257 secs                                           total of 55940 row was converted
+2026-02-09 23:13:35	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 23:14:24	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 49.6 secs
+2026-02-09 23:14:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 49.634565114975 secs                                           total of 12132633 row was converted
+2026-02-09 23:14:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-09 23:24:21	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.93 mins
+2026-02-09 23:24:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.93073496818542 mins                                           total of 64927815 row was converted
+2026-02-09 23:39:03	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-09 23:39:03	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-09 23:53:42	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 14.7 mins
+2026-02-09 23:53:42	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 14.7 mins
+2026-02-09 23:53:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 14.6603483478228 mins                                           total of 48617923 row was converted
+2026-02-09 23:53:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 14.6603483478228 mins                                           total of 48617923 row was converted
+2026-02-09 23:53:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 23:53:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-09 23:54:33	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 49.3 secs
+2026-02-09 23:54:33	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 49.3 secs
+2026-02-09 23:54:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 49.2926061153412 secs                                           total of 12132633 row was converted
+2026-02-09 23:54:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 49.2926061153412 secs                                           total of 12132633 row was converted
+2026-02-09 23:54:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-09 23:54:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-10 00:03:49	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.26 mins
+2026-02-10 00:03:49	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.26 mins
+2026-02-10 00:03:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.25614168246587 mins                                           total of 64927815 row was converted
+2026-02-10 00:03:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.25614168246587 mins                                           total of 64927815 row was converted
