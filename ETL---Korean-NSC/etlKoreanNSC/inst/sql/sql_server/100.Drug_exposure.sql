@@ -18,6 +18,10 @@
  --Description: Create Drug_exposure table
 			   * ETL should be performed individualy by 30T(daignosis), 60T(prescription)
  --Generating Table: DRUG_EXPOSURE
+ --
+ --Design: One source row may produce multiple rows when source_to_concept_map has
+ --  multiple target_concept_id per source_code. This is intentional to preserve
+ --  vocabulary information; analysts can filter or aggregate as needed.
 ***************************************/
 
 /**************************************
@@ -55,7 +59,8 @@ CREATE TABLE @NHISNSC_database.DRUG_EXPOSURE (
 IF OBJECT_ID('tempdb..#mapping_table', 'U') IS NOT NULL
 	DROP TABLE #mapping_table;
 
-select a.source_code, a.target_concept_id, a.domain_id, REPLACE(a.invalid_reason, '', NULL) as invalid_reason
+select a.source_code, a.target_concept_id, a.domain_id, REPLACE(a.invalid_reason, '', NULL) as invalid_reason,
+	ROW_NUMBER() OVER (ORDER BY a.source_code, a.target_concept_id, (SELECT NEWID())) as rn
 into #mapping_table
 from @Mapping_database.source_to_concept_map a join @Mapping_database.CONCEPT b on a.target_concept_id=b.concept_id
 where a.invalid_reason is null and b.invalid_reason is null and a.domain_id='drug';
@@ -70,7 +75,7 @@ drug_type_concept_id, stop_reason, refills, quantity, days_supply,
 sig, route_concept_id, lot_number,
 provider_id, visit_occurrence_id, drug_source_value, drug_source_concept_id, route_source_value, 
 dose_unit_source_value)
-SELECT convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as drug_exposure_id,
+SELECT convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, b.rn))) as drug_exposure_id,
 	a.person_id as person_id,
 	b.target_concept_id as drug_concept_id,
 	CONVERT(date, a.recu_fr_dt, 112) as drug_exposure_start_date,
@@ -127,7 +132,7 @@ drug_type_concept_id, stop_reason, refills, quantity, days_supply,
 sig, route_concept_id, lot_number,
 provider_id, visit_occurrence_id, drug_source_value, drug_source_concept_id, route_source_value, 
 dose_unit_source_value)
-SELECT convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as drug_exposure_id,
+SELECT convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, b.rn))) as drug_exposure_id,
 	a.person_id as person_id,
 	b.target_concept_id as drug_concept_id,
 	CONVERT(date, a.recu_fr_dt, 112) as drug_exposure_start_date,
@@ -176,7 +181,7 @@ sig, route_concept_id, lot_number,
 provider_id, visit_occurrence_id, drug_source_value, drug_source_concept_id, route_source_value, 
 dose_unit_source_value)
 SELECT
-	 convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as drug_exposure_id,
+	 convert(bigint, convert(bigint, a.master_seq) * 100 + 5 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd desc, a.key_seq, a.seq_no, (SELECT NEWID())))) as drug_exposure_id,
 	a.person_id as person_id,
 	0 as drug_concept_id,
 	CONVERT(date, a.recu_fr_dt, 112) as drug_exposure_start_date,
@@ -232,7 +237,7 @@ drug_type_concept_id, stop_reason, refills, quantity, days_supply,
 sig, route_concept_id, lot_number,
 provider_id, visit_occurrence_id, drug_source_value, drug_source_concept_id, route_source_value, 
 dose_unit_source_value)
-SELECT convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as drug_exposure_id,
+SELECT convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd, a.key_seq, a.seq_no, (SELECT NEWID())))) as drug_exposure_id,
 	a.person_id as person_id,
 	0 as drug_concept_id,
 	CONVERT(date, a.recu_fr_dt, 112) as drug_exposure_start_date,

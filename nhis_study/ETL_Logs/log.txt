@@ -3384,3 +3384,157 @@
 2026-02-10 00:03:49	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.26 mins
 2026-02-10 00:03:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.25614168246587 mins                                           total of 64927815 row was converted
 2026-02-10 00:03:54	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.25614168246587 mins                                           total of 64927815 row was converted
+2026-02-16 17:25:40	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-16 17:28:36	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.condition_occurrence' 및 인덱스 이름 'xpk_condition_occurrence'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (40000078521)입니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-17 22:07:52	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-17 22:27:05	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 19.2 mins
+2026-02-17 22:27:08	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 19.2279407501221 mins                                           total of 48617923 row was converted
+2026-02-17 22:27:08	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 140.Payer_plan_period.sql
+2026-02-17 22:27:59	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 50.3 secs
+2026-02-17 22:27:59	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	payer_plan_period was converted.                                          elapsed time : 50.3221960067749 secs                                           total of 12132633 row was converted
+2026-02-17 22:27:59	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-17 22:37:26	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.45 mins
+2026-02-17 22:37:31	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.45468186934789 mins                                           total of 64927815 row was converted
+2026-02-18 12:41:29	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 13:02:35	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 21.1 mins
+2026-02-18 13:02:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 21.1033770163854 mins                                           total of 48617923 row was converted
+2026-02-18 13:02:38	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 100.Drug_exposure.sql
+2026-02-18 14:00:32	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 57.9 mins
+2026-02-18 14:00:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	drug_exposure was converted.                                          elapsed time : 57.8919081171354 mins                                           total of 92041802 row was converted
+2026-02-18 14:00:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-18 14:26:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 26.3 mins
+2026-02-18 14:26:55	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	procedure_occurrence was converted.                                          elapsed time : 26.3347835143407 mins                                           total of 45158792 row was converted
+2026-02-18 14:26:55	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 120.Device_exposure.sql
+2026-02-18 14:28:30	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 1.57 mins
+2026-02-18 14:28:30	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	device_exposure was converted.                                          elapsed time : 1.57146453062693 mins                                           total of 1020577 row was converted
+2026-02-18 14:28:30	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 14:33:38	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 5.14 mins
+2026-02-18 14:33:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 5.14140823682149 mins                                           total of 64927815 row was converted
+2026-02-18 15:33:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 15:53:02	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 19.6 mins
+2026-02-18 15:53:05	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 19.6180215994517 mins                                           total of 48617923 row was converted
+2026-02-18 15:53:05	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 16:02:42	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.62 mins
+2026-02-18 16:02:48	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.61630858182907 mins                                           total of 64927815 row was converted
+2026-02-18 17:15:28	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 17:33:17	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 17.8 mins
+2026-02-18 17:33:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 17.8262377818426 mins                                           total of 48617923 row was converted
+2026-02-18 17:33:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 17:51:35	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 17.9 mins
+2026-02-18 17:51:39	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 17.929324567318 mins                                           total of 64927815 row was converted
+2026-02-18 19:25:34	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 19:41:01	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 15.4 mins
+2026-02-18 19:41:04	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 15.4388162652651 mins                                           total of 48617923 row was converted
+2026-02-18 19:41:04	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 19:50:57	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.89 mins
+2026-02-18 19:51:03	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.8871694167455 mins                                           total of 64927815 row was converted
+2026-02-18 19:57:50	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 20:16:22	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 18.5 mins
+2026-02-18 20:16:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 18.5356063008308 mins                                           total of 48617923 row was converted
+2026-02-18 20:16:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 20:25:39	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 9.23 mins
+2026-02-18 20:25:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 9.22966860135396 mins                                           total of 64927815 row was converted
+2026-02-18 20:43:09	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 080.Condition_occurrence.sql
+2026-02-18 20:58:30	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 15.3 mins
+2026-02-18 20:58:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	condition_occurrence was converted.                                          elapsed time : 15.3510305643082 mins                                           total of 48617923 row was converted
+2026-02-18 20:58:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-18 21:51:54	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 53.4 mins
+2026-02-18 21:52:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 53.3536336024602 mins                                           total of 64927815 row was converted
+2026-02-19 20:08:19	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 100.Drug_exposure.sql
+2026-02-19 20:55:35	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 47.3 mins
+2026-02-19 20:55:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	drug_exposure was converted.                                          elapsed time : 47.2698273658752 mins                                           total of 92041802 row was converted
+2026-02-19 20:55:37	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-19 20:59:51	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 이름 'rn'이(가) 유효하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-19 21:42:16	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 100.Drug_exposure.sql
+2026-02-19 22:33:16	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 51 mins
+2026-02-19 22:33:18	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	drug_exposure was converted.                                          elapsed time : 51.0027568658193 mins                                           total of 92041802 row was converted
+2026-02-19 22:33:18	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-19 22:37:33	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 이름 'rn'이(가) 유효하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 13:59:02	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-20 14:04:58	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 키워드 'as' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 16:18:02	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-20 16:20:16	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 키워드 'as' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 16:52:42	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 110.Procedure_occurrence.sql
+2026-02-20 17:10:14	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 17.5 mins
+2026-02-20 17:10:15	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	procedure_occurrence was converted.                                          elapsed time : 17.5226452469826 mins                                           total of 45316524 row was converted
+2026-02-20 17:10:15	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 120.Device_exposure.sql
+2026-02-20 17:10:54	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 이름 'rn'이(가) 유효하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 18:58:30	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 120.Device_exposure.sql
+2026-02-20 19:01:44	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 3.24 mins
+2026-02-20 19:01:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	device_exposure was converted.                                          elapsed time : 3.23753253221512 mins                                           total of 1020577 row was converted
+2026-02-20 19:01:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 150.Cost.sql
+2026-02-20 19:38:53	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 37.1 mins
+2026-02-20 19:39:00	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	cost was converted.                                          elapsed time : 37.1491499145826 mins                                           total of 65085547 row was converted
+2026-02-20 20:30:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 20:30:43	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 20:34:30	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'concept'에 있는 열 'concept_code'의 유형이 인덱스에서 키 열로 사용하기에 적합하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 20:34:30	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'concept'에 있는 열 'concept_code'의 유형이 인덱스에서 키 열로 사용하기에 적합하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 21:27:59	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 21:30:41	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'concept_relationship'에 있는 열 'relationship_id'의 유형이 인덱스에서 키 열로 사용하기에 적합하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 21:32:06	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 21:36:38	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 테이블 'concept_synonym'에 있는 열 'concept_id'의 유형이 인덱스에서 키 열로 사용하기에 적합하지 않습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 22:17:41	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 22:17:41	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-20 22:29:39	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 "cohort_definition"이(가) 없거나 권한이 없으므로 이를 찾을 수 없습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-20 22:29:39	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 "cohort_definition"이(가) 없거나 권한이 없으므로 이를 찾을 수 없습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-22 20:39:19	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 400.Indexing.sql
+2026-02-22 21:19:46	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 40.4 mins
+2026-02-22 21:19:46	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	elapsed time : 40.4430192510287 mins  
+2026-02-22 21:58:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-02-22 21:58:44	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-02-22 21:58:44	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 'domain.domain_id'의 길이 또는 배율이 외래 키 'fpk_concept_domain'에 있는 참조 열 'concept.domain_id'의 길이 또는 배율과 다릅니다. 외래 키 관계에 참여하는 열은 같은 길이와 배율로 정의되어야 합니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-22 21:58:44	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 'domain.domain_id'의 길이 또는 배율이 외래 키 'fpk_concept_domain'에 있는 참조 열 'concept.domain_id'의 길이 또는 배율과 다릅니다. 외래 키 관계에 참여하는 열은 같은 길이와 배율로 정의되어야 합니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-22 22:17:28	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-02-22 22:17:28	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-02-22 22:17:28	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-02-22 22:18:02	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_concept_relationship_c_1"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-22 22:18:02	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_concept_relationship_c_1"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-02-22 22:18:02	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_concept_relationship_c_1"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:07:47	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:07:47	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 스칼라 변수 "@msg"을(를) 선언해야 합니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:13:17	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:19:02	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 "cohort_definition"이(가) 없거나 권한이 없으므로 이를 찾을 수 없습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:28:02	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:28:56	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 "cohort_definition"이(가) 없거나 권한이 없으므로 이를 찾을 수 없습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:31:48	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:33:54	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 "attribute_definition"이(가) 없거나 권한이 없으므로 이를 찾을 수 없습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:39:41	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:43:57	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 'visit_concept_s' 근처의 구문이 잘못되었습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-02 22:45:35	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-02 22:46:04	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스에 'fpk_person_gender_concept'(이)라는 개체가 이미 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 12:26:17	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 12:28:28	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스에 'fpk_person_gender_concept'(이)라는 개체가 이미 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 12:29:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 12:31:38	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스에 'fpk_person_race_concept'(이)라는 개체가 이미 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 12:36:25	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 12:36:41	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 데이터베이스에 'fpk_observation_period_person'(이)라는 개체가 이미 있습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 12:43:42	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 12:47:02	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 'visit_occurrence.visit_occurrence_id'의 데이터 형식이 외래 키 'fpk_visit_preceding'에 있는 참조 열 'visit_occurrence.preceding_visit_occurrence_id'의 데이터 형식과 다릅니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 12:50:57	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 12:56:06	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 열 'person.person_id'의 데이터 형식이 외래 키 'fpk_drug_person'에 있는 참조 열 'drug_exposure.person_id'의 데이터 형식과 다릅니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 13:45:30	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-03-03 13:45:31	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 13:45:31	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 13:48:50	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_measurement_concept"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 13:48:50	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_measurement_concept"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 14:56:19	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-03-03 14:56:19	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-03-03 14:56:20	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 14:56:20	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 14:56:20	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 14:57:23	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_observation_concept"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 14:57:23	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_observation_concept"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 14:57:23	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_observation_concept"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 15:32:33	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 15:37:39	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_care_site_location"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.location", column 'location_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 15:45:29	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 15:48:00	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE 문이 FOREIGN KEY 제약 조건 "fpk_care_site_place"과(와) 충돌했습니다. 데이터베이스 "nhisnsc2013cdm", 테이블 "dbo.concept", column 'concept_id'에서 충돌이 발생했습니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 16:00:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 16:02:57	[Main thread]	FATAL	DatabaseConnector	.createErrorReport	Error executing SQL: com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.concept_synonym' 및 인덱스 이름 'uq_concept_synonym'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (26942, Sickle cell anaemia with crisis, 4180186)입니다. An error report has been created at  C:/Users/chaeyoon/Desktop/koreajapan/nhis_study/errorReportSql.txt
+2026-03-03 16:39:52	[Main thread]	INFO	DatabaseConnector	connectSqlServer	Connecting using SQL Server driver
+2026-03-03 16:39:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 16:39:53	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	ETL 500.Constraints.sql
+2026-03-03 16:42:32	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 2.65 mins
+2026-03-03 16:42:32	[Main thread]	INFO	DatabaseConnector	executeSql	Executing SQL took 2.65 mins
+2026-03-03 16:42:32	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	elapsed time : 2.65439135233561 mins  
+2026-03-03 16:42:32	[Main thread]	INFO	etlKoreanNSC	executeNHISETL	elapsed time : 2.65439135233561 mins  

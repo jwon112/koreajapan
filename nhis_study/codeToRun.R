@@ -68,21 +68,21 @@ executeNHISETL(
   death = FALSE,
   observation_period = FALSE,
   visit_occurrence = FALSE,
-  condition_occurrence = TRUE,
+  condition_occurrence = FALSE,
   observation = FALSE,
   drug_exposure = FALSE,
   procedure_occurrence = FALSE,
   device_exposure = FALSE,
   measurement = FALSE,
-  payer_plan_period = TRUE,
-  cost = TRUE,
+  payer_plan_period = FALSE,
+  cost = FALSE,
   
   # 후처리
   generateEra = FALSE,          # Era 테이블 생성 (시간 오래 걸림)
   dose_era = FALSE,
   cdm_source = FALSE,
   indexing = FALSE,             # 인덱스 생성 (필수)
-  constraints = FALSE,          # 제약조건 생성 (필수)
+  constraints = TRUE,          # 제약조건 생성 (필수)
   data_cleansing = FALSE       # 데이터 클렌징 (선택 사항)
 )
 

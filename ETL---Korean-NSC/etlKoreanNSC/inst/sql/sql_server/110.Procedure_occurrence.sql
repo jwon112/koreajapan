@@ -19,6 +19,10 @@
  --Description: Create Procedure_occurrence table
 			   * ETL should be performed individualy by 30T(diagnosis), 60T(prescription) table
  --Generating Table: PROCEDURE_OCCURRENCE
+ --
+ --Design: One source row may produce multiple rows when source_to_concept_map has
+ --  multiple target_concept_id per source_code. This is intentional to preserve
+ --  vocabulary information; analysts can filter or aggregate as needed.
 ***************************************/
 
 /**************************************
@@ -122,7 +126,8 @@ from #pro a, #five b
 where a.source_code=b.source_code
 	and a.invalid_reason is null and b.invalid_reason is null;
 
-select * into #mapping_table from #temp
+select *, ROW_NUMBER() OVER (ORDER BY source_code, target_concept_id, NEWID()) as rn
+into #mapping_table from #temp
 where source_code not in (select source_code from #duplicated);
 
 drop table #pro, #five, #temp;
@@ -135,7 +140,7 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT
-	convert(bigint, convert(bigint, a.master_seq) * 10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as procedure_occurrence_id,
+convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
 	CASE WHEN b.target_concept_id IS NOT NULL THEN b.target_concept_id ELSE 0 END as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
@@ -146,12 +151,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_mqty_exec_freq is not null and isnumeric(x.dd_mqty_exec_freq)=1 and cast(x.dd_mqty_exec_freq as float) > '0' then cast(x.dd_mqty_exec_freq as float) else 1 end as dd_mqty_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd not in ('3','4','5', '7','8')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd not in ('3','4','5', '7','8')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='130') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a, #mapping_table b
@@ -166,7 +171,7 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT 
-	convert(bigint, convert(bigint, a.master_seq) * 10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as procedure_occurrence_id,
+convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
 	CASE WHEN b.target_concept_id IS NOT NULL THEN b.target_concept_id ELSE 0 END as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
@@ -177,12 +182,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_exec_freq is not null and isnumeric(x.dd_exec_freq)=1 and cast(x.dd_exec_freq as float) > '0' then cast(x.dd_exec_freq as float) else 1 end as dd_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd not in ('3','4','5', '7','8')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd not in ('3','4','5', '7','8')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='160') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a, #mapping_table b
@@ -198,7 +203,7 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT
-	convert(bigint, convert(bigint, a.master_seq) * 10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as procedure_occurrence_id,
+	convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
 	CASE WHEN b.target_concept_id IS NOT NULL THEN b.target_concept_id ELSE 0 END as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
@@ -209,12 +214,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_mqty_exec_freq is not null and isnumeric(x.dd_mqty_exec_freq)=1 and cast(x.dd_mqty_exec_freq as float) > '0' then cast(x.dd_mqty_exec_freq as float) else 1 end as dd_mqty_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd in ('1','2')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd in ('1','2')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='130') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a, #duplicated b
@@ -229,7 +234,7 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT 
-	convert(bigint, convert(bigint, a.master_seq) * 10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as procedure_occurrence_id,
+	convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
 	CASE WHEN b.target_concept_id IS NOT NULL THEN b.target_concept_id ELSE 0 END as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
@@ -240,12 +245,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_exec_freq is not null and isnumeric(x.dd_exec_freq)=1 and cast(x.dd_exec_freq as float) > '0' then cast(x.dd_exec_freq as float) else 1 end as dd_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd in ('1', '2')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd in ('1', '2')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='160') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a, #duplicated b
@@ -261,9 +266,9 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT
-	convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as procedure_occurrence_id,
+	convert(bigint, convert(bigint, a.master_seq) * 100 + 5 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
-	'0' as procedure_concept_id,
+	0 as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
 	45756900 as procedure_type_concept_id,
 	NULL as modifier_concept_id,
@@ -272,12 +277,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_mqty_exec_freq is not null and isnumeric(x.dd_mqty_exec_freq)=1 and cast(x.dd_mqty_exec_freq as float) > '0' then cast(x.dd_mqty_exec_freq as float) else 1 end as dd_mqty_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd in ('1', '2')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_30T where div_type_cd in ('1', '2')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='130') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a 
@@ -292,9 +297,9 @@ INSERT INTO @NHISNSC_database.PROCEDURE_OCCURRENCE
 	modifier_concept_id, quantity, provider_id, visit_occurrence_id, procedure_source_value, 
 	procedure_source_concept_id)
 SELECT 
-	convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as procedure_occurrence_id,
+	convert(bigint, convert(bigint, a.master_seq) * 100 + 5 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd desc, a.key_seq, a.seq_no, NEWID()))) as procedure_occurrence_id,
 	a.person_id as person_id,
-	'0' as procedure_concept_id,
+	0 as procedure_concept_id,
 	CONVERT(VARCHAR, a.recu_fr_dt, 112) as procedure_date,
 	45756900 as procedure_type_concept_id,
 	NULL as modifier_concept_id,
@@ -303,12 +308,12 @@ SELECT
 	a.key_seq as visit_occurrence_id,
 	a.div_cd as procedure_source_value,
 	null as procedure_source_concept_id
-FROM (SELECt x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd, 
+FROM (SELECT x.key_seq, x.seq_no, x.recu_fr_dt, x.div_cd,
 			case when x.mdcn_exec_freq is not null and isnumeric(x.mdcn_exec_freq)=1 and cast(x.mdcn_exec_freq as float) > '0' then cast(x.mdcn_exec_freq as float) else 1 end as mdcn_exec_freq,
 			case when x.dd_exec_freq is not null and isnumeric(x.dd_exec_freq)=1 and cast(x.dd_exec_freq as float) > '0' then cast(x.dd_exec_freq as float) else 1 end as dd_exec_freq,
 			case when x.dd_mqty_freq is not null and isnumeric(x.dd_mqty_freq)=1 and cast(x.dd_mqty_freq as float) > '0' then cast(x.dd_mqty_freq as float) else 1 end as dd_mqty_freq,
 			y.master_seq, y.person_id
-	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd in ('1', '2')) x, 
+	FROM (select * from @NHISNSC_rawdata.@NHIS_60T where div_type_cd in ('1', '2')) x,
 		 (select master_seq, key_seq, seq_no, person_id from @NHISNSC_database.SEQ_MASTER where source_table='160') y
 	WHERE x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a 
@@ -319,6 +324,4 @@ drop table #mapping_table, #duplicated;
 
 -- Delete duplicated keys
 delete from @NHISNSC_database.procedure_occurrence
-where procedure_occurrence_id in (select drug_exposure_id from @NHISNSC_database.drug_exposure)
-
-
+where procedure_occurrence_id in (select drug_exposure_id from @NHISNSC_database.drug_exposure);

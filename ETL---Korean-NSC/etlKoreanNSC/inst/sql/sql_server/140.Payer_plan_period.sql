@@ -45,7 +45,7 @@ CREATE TABLE @NHISNSC_database.PAYER_PLAN_PERIOD
 ***************************************/  
 
 INSERT INTO @NHISNSC_database.PAYER_PLAN_PERIOD (payer_plan_period_id, person_id, payer_plan_period_start_date, payer_plan_period_end_date, payer_source_value, plan_source_value, family_source_value)
-	SELECT	a.person_id+STND_Y as payer_plan_period_id,
+	SELECT	a.person_id * 10000 + CAST(STND_Y AS INT) as payer_plan_period_id,
 			a.person_id as person_id,
 			cast(convert(VARCHAR, STND_Y + '0101' ,23) as date) as payer_plan_period_start_date,
 			case when year < death_date then a.year

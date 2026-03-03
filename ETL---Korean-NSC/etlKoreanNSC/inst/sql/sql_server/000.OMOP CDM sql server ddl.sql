@@ -371,7 +371,7 @@ CREATE TABLE procedure_occurrence
 CREATE TABLE drug_exposure
 (
   drug_exposure_id				      bigint			  NOT NULL ,
-  person_id						          bigint			  NOT NULL ,
+  person_id						          INTEGER			  NOT NULL ,
   drug_concept_id				        INTEGER			  NOT NULL ,
   drug_exposure_start_date		  DATE			    NOT NULL ,
   drug_exposure_start_datetime  DATETIME2		  NULL ,
@@ -710,7 +710,7 @@ CREATE TABLE drug_era
 CREATE TABLE dose_era
 (
   dose_era_id					  INTEGER  identity(1,1)	NOT NULL ,
-  person_id						  bigint			NOT NULL ,
+  person_id						  INTEGER			NOT NULL ,
   drug_concept_id				INTEGER			NOT NULL ,
   unit_concept_id				INTEGER			NULL ,
   dose_value						FLOAT			  NOT NULL ,

@@ -15,6 +15,10 @@
  @CONDITION_MAPPINGTABLE : mapping table between KCD and SNOMED-CT
  --Description: Create Condition_occurrence table
  --Generating Table: CONDITION_OCCURRENCE
+ --
+ --Design: One source row may produce multiple rows when source_to_concept_map has
+ --  multiple target_concept_id per source_code. This is intentional to preserve
+ --  vocabulary information; analysts can filter or aggregate (e.g. by visit + source_value) when one event per source row is needed.
 ***************************************/
 
 /**************************************
@@ -39,7 +43,8 @@ CREATE TABLE @NHISNSC_database.CONDITION_OCCURRENCE (
 /**************************************
  1-1. Create temp mapping table
 ***************************************/
-select a.source_code, a.target_concept_id, a.domain_id, REPLACE(a.invalid_reason, '', NULL) as invalid_reason
+select a.source_code, a.target_concept_id, a.domain_id, REPLACE(a.invalid_reason, '', NULL) as invalid_reason,
+	ROW_NUMBER() OVER (ORDER BY a.source_code, a.target_concept_id, (SELECT NEWID())) as rn
 into #mapping_table
 from @Mapping_database.source_to_concept_map a join @Mapping_database.CONCEPT b on a.target_concept_id=b.concept_id
 where a.invalid_reason is null and b.invalid_reason is null and a.domain_id='condition'
@@ -70,7 +75,7 @@ INSERT INTO @NHISNSC_database.CONDITION_OCCURRENCE
 	condition_type_concept_id, stop_reason, provider_id, visit_occurrence_id, condition_source_value, 
 	condition_source_concept_id)
 select
-	convert(bigint, convert(bigint, m.master_seq) * 10 + convert(bigint, ROW_NUMBER() OVER(partition BY key_seq, seq_no order by target_concept_id desc))) as condition_occurrence_id,
+	convert(bigint, convert(bigint, m.master_seq) * 100 + convert(bigint, ROW_NUMBER() OVER(partition BY m.master_seq order by m.sick_sym, n.target_concept_id desc, m.key_seq, m.seq_no, n.rn))) as condition_occurrence_id,
 	--ROW_NUMBER() OVER(partition BY key_seq, seq_no order by concept_id desc) AS rank, m.seq_no,
 	m.person_id as person_id,
 	n.target_concept_id as condition_concept_id,
@@ -121,7 +126,7 @@ INSERT INTO @NHISNSC_database.CONDITION_OCCURRENCE
 	condition_type_concept_id, stop_reason, provider_id, visit_occurrence_id, condition_source_value, 
 	condition_source_concept_id)
 select
-	convert(bigint, convert(bigint, m.master_seq) * 10 + convert(bigint, ROW_NUMBER() OVER(partition BY key_seq, seq_no order by m.sick_sym desc))) as condition_occurrence_id,
+	convert(bigint, convert(bigint, m.master_seq) * 10 + 5 + convert(bigint, ROW_NUMBER() OVER(partition BY key_seq, seq_no order by m.sick_sym desc, m.key_seq, m.seq_no, (SELECT NEWID())))) as condition_occurrence_id,
 	m.person_id as person_id,
 	0 as condition_concept_id,
 	convert(date, m.recu_fr_dt, 112) as condition_start_date,

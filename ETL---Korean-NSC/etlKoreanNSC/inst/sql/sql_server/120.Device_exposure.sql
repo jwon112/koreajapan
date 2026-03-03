@@ -25,6 +25,10 @@
 																												or in case of 60T then using DD_EXEC_FREQ, MDCN_EXEC_FREQ, DD_MQTY_FREQ
 					3. If all of UN_COST,AMT and usages are abnormal('0') then define as '1'
  --Generating Table: Device_exposure
+ --
+ --Design: One source row may produce multiple rows when source_to_concept_map has
+ --  multiple target_concept_id per source_code. This is intentional to preserve
+ --  vocabulary information; analysts can filter or aggregate as needed.
 ***************************************/
 
 /**************************************
@@ -75,7 +79,8 @@ from #device a, #five b
 where a.source_code=b.source_code
 	and a.invalid_reason='' and b.invalid_reason='';
 
-select * into #mapping_table from #temp
+select *, ROW_NUMBER() OVER (ORDER BY source_code, target_concept_id, NEWID()) as rn
+into #mapping_table from #temp
 where source_code not in (select source_code from #duplicated);
 
 drop table #device, #five, #temp;
@@ -87,7 +92,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 (device_exposure_id, person_id, device_concept_id, device_exposure_start_date, 
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
-select  convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as device_exposure_id,
+select  convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		b.target_concept_id as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,
@@ -123,7 +128,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 (device_exposure_id, person_id, device_concept_id, device_exposure_start_date, 
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
-select 	convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as device_exposure_id,
+select 	convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		b.target_concept_id as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,
@@ -159,7 +164,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 (device_exposure_id, person_id, device_concept_id, device_exposure_start_date, 
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
-select  convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as device_exposure_id,
+select  convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		b.target_concept_id as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,
@@ -195,7 +200,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 (device_exposure_id, person_id, device_concept_id, device_exposure_start_date, 
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
-select 	convert(bigint, convert(bigint, a.master_seq) *10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by b.target_concept_id))) as device_exposure_id,
+select 	convert(bigint, convert(bigint, a.master_seq) * 100 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd, b.target_concept_id desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		b.target_concept_id as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,
@@ -222,6 +227,7 @@ FROM
 	AND x.key_seq=y.key_seq
 	AND x.seq_no=y.seq_no) a JOIN #duplicated b 
 	on a.div_cd=b.source_code
+;
 
 /**************************************
  2-3. Insert data using 30T which are unmapped with temp mapping table
@@ -231,7 +237,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
 select  
-		convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as device_exposure_id,
+		convert(bigint, convert(bigint, a.master_seq) * 100 + 5 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		0 as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,
@@ -268,7 +274,7 @@ insert into @NHISNSC_database.DEVICE_EXPOSURE
 device_exposure_end_date, device_type_concept_id, unique_device_id, quantity, 
 provider_id, visit_occurrence_id, device_source_value, device_source_concept_id)
 select 
-		convert(bigint, convert(bigint, a.master_seq)*10 + convert(bigint, row_number() over (partition by a.key_seq, a.seq_no order by a.div_cd))) as device_exposure_id,
+		convert(bigint, convert(bigint, a.master_seq) * 100 + 5 + convert(bigint, row_number() over (partition by a.master_seq order by a.div_cd desc, a.key_seq, a.seq_no, NEWID()))) as device_exposure_id,
 		a.person_id as person_id,
 		0 as device_concept_id ,
 		CONVERT(VARCHAR, a.recu_fr_dt, 23) as device_source_start_date,

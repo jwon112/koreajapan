@@ -2,18 +2,12 @@ DBMS:
 sql server
 
 Error:
-com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.death' 및 인덱스 이름 'xpk_death'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (10000655)입니다.
+com.microsoft.sqlserver.jdbc.SQLServerException: 개체 이름 'dbo.concept_synonym' 및 인덱스 이름 'uq_concept_synonym'에 키가 중복되므로 CREATE UNIQUE INDEX 문이 종료되었습니다. 중복 키 값은 (26942, Sickle cell anaemia with crisis, 4180186)입니다.
 
 SQL:
-IF NOT EXISTS (
-    SELECT 1 FROM sys.key_constraints
-    WHERE parent_object_id = OBJECT_ID('death')
-      AND type = 'PK'
-      AND name = 'xpk_death'
-)
-BEGIN
-    ALTER TABLE death ADD CONSTRAINT xpk_death PRIMARY KEY NONCLUSTERED ( person_id ) ;
-END;
+Use nhisnsc2013cdm
+
+ALTER TABLE concept_synonym ADD CONSTRAINT uq_concept_synonym UNIQUE (concept_id, concept_synonym_name, language_concept_id)
 
 R version:
 R version 4.5.2 (2025-10-31 ucrt)
