@@ -156,7 +156,9 @@ executeNHISETL <- function(NHISNSC_rawdata,
         cdm_release_date_str <- format(cdm_release_date, "%Y-%m-%d")
         esc <- function(x) gsub("'", "''", as.character(x), fixed = TRUE)
         vocab_sql <- if (is.na(vocab_ver) || identical(vocab_ver, "")) "NULL" else paste0("'", esc(vocab_ver), "'")
-        insertSql <- "INSERT INTO @NHISNSC_database.CDM_SOURCE (cdm_source_name, cdm_source_abbreviation, cdm_holder, source_description, source_documentation_reference, cdm_etl_reference, cdm_release_date, cdm_version, vocabulary_version) VALUES ('@cdm_source_name', '@cdm_source_abbreviation', '@cdm_holder', '@source_description', '@source_documentation_reference', '@cdm_etl_reference', '@cdm_release_date', '@cdm_version', @vocabulary_version)"
+        insertSql <- "INSERT INTO @NHISNSC_database.CDM_SOURCE (cdm_source_name, cdm_source_abbreviation, cdm_holder, source_description, source_documentation_reference, cdm_etl_reference, cdm_release_date, cdm_version, vocabulary_version)
+SELECT '@cdm_source_name', '@cdm_source_abbreviation', '@cdm_holder', '@source_description', '@source_documentation_reference', '@cdm_etl_reference', '@cdm_release_date', '@cdm_version', @vocabulary_version
+WHERE NOT EXISTS (SELECT 1 FROM @NHISNSC_database.CDM_SOURCE)"
         insertSql <- SqlRender::render(insertSql,
                                      NHISNSC_database = NHISNSC_database,
                                      cdm_source_name = esc(cdm_source_name),
