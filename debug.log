@@ -1,0 +1,3 @@
+[0401/230435.373:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0406/155128.555:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)
+[0407/163125.771:ERROR:third_party\crashpad\crashpad\util\win\registration_protocol_win.cc:108] CreateFile: 지정된 파일을 찾을 수 없습니다. (0x2)

@@ -32,17 +32,34 @@ import_vocabulary_bulk = False
 
 # =============================================================================
 # --- 데이터 적재 (필요한 부분만 TRUE) ---
+# 실행 순서는 phase1_setup.ETL_STEP_SQL 고정 (여러 개 True여도 동일):
+#   person → death → observation_period → visit_occurrence → condition_occurrence
+#   → drug_exposure → procedure_occurrence
 # =============================================================================
-location = False
-care_site = False
+# --- Phase1 도메인 ---
 person = False
 death = False
 observation_period = False
 visit_occurrence = False
 condition_occurrence = False
-observation = False
 drug_exposure = False
 procedure_occurrence = False
+
+# =============================================================================
+# --- Procedure 로컬 매핑 파이프라인(실험) ---
+# =============================================================================
+# procedure_occurrence 실행 전에 로컬 매핑 테이블을 자동 생성/갱신.
+# - rules_only: 내부 규칙(마스터 테이블/ICD9CM 등)만
+# - rules_plus_external: 규칙 + 외부 매핑 도구 CSV(점수 임계값 이상 자동 반영)
+procedure_mapping_mode = None  # None | "rules_only" | "rules_plus_external"
+procedure_mapping_auto_score_threshold = 0.90
+procedure_external_mapping_csv = None  # 예: r"E:\...\\procedure_mapping_results.csv"
+procedure_mapping_export_csv = None  # JP_PROCEDURE_MASTER 참조용 CSV (임의 도구 입력)
+
+# --- 미구현 (켜도 [TODO] 로그만) ---
+location = False
+care_site = False
+observation = False
 device_exposure = False
 measurement = False
 payer_plan_period = False
@@ -64,16 +81,20 @@ def _collect_flags():
         "CDM_ddl": CDM_ddl,
         "create_database_if_missing": create_database_if_missing,
         "master_table": master_table,
-        "location": location,
-        "care_site": care_site,
         "person": person,
         "death": death,
         "observation_period": observation_period,
         "visit_occurrence": visit_occurrence,
         "condition_occurrence": condition_occurrence,
-        "observation": observation,
         "drug_exposure": drug_exposure,
         "procedure_occurrence": procedure_occurrence,
+        "procedure_mapping_mode": procedure_mapping_mode,
+        "procedure_mapping_auto_score_threshold": procedure_mapping_auto_score_threshold,
+        "procedure_external_mapping_csv": procedure_external_mapping_csv,
+        "procedure_mapping_export_csv": procedure_mapping_export_csv,
+        "location": location,
+        "care_site": care_site,
+        "observation": observation,
         "device_exposure": device_exposure,
         "measurement": measurement,
         "payer_plan_period": payer_plan_period,

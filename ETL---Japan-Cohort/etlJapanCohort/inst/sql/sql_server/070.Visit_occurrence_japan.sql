@@ -7,7 +7,7 @@
 INSERT INTO @cdm_database.visit_occurrence (
     visit_occurrence_id, person_id, visit_concept_id, visit_start_date, visit_start_datetime,
     visit_end_date, visit_end_datetime, visit_type_concept_id, provider_id, care_site_id,
-    visit_source_value, visit_source_concept_id
+    visit_source_value, visit_source_concept_id, master_seq
 )
 SELECT
     (SELECT ISNULL(MAX(visit_occurrence_id), 0) FROM @cdm_database.visit_occurrence)
@@ -28,7 +28,16 @@ SELECT
     NULL AS provider_id,
     NULL AS care_site_id,
     c.claim_id AS visit_source_value,
-    NULL AS visit_source_concept_id
+    NULL AS visit_source_concept_id,
+    sm.master_seq
 FROM @raw_database.JP_CLAIMS c
 INNER JOIN @cdm_database.person p ON p.person_source_value = c.member_id
+OUTER APPLY (
+    SELECT TOP (1) m.master_seq
+    FROM @cdm_database.SEQ_MASTER m
+    WHERE m.source_table = 'CLM'
+      AND m.member_id = CAST(c.member_id AS VARCHAR(50))
+      AND m.claim_id = CAST(c.claim_id AS VARCHAR(50))
+      AND m.statement_id IS NULL
+) sm
 WHERE c.claim_id NOT IN (SELECT visit_source_value FROM @cdm_database.visit_occurrence);

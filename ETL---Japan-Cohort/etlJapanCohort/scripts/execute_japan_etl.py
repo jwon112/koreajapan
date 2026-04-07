@@ -12,6 +12,7 @@
   메인 진입점(codeToRun_japan.py)에서 플래그를 지정하세요.
 """
 
+import importlib
 import os
 import sys
 
@@ -19,8 +20,10 @@ _script_dir = os.path.dirname(os.path.abspath(__file__))
 if _script_dir not in sys.path:
     sys.path.insert(0, _script_dir)
 
-from phase0_setup import run_phase0
-from phase1_setup import ETL_STEP_SQL, run_master_table, run_etl_steps
+import time
+
+import phase0_setup
+import phase1_setup
 
 POST_ETL_FLAGS = (
     "location",
@@ -48,7 +51,16 @@ def _get(f, key, default=False):
 def run_japan_etl(flags):
     """
     flags: dict 또는 SimpleNamespace — codeToRun_2.R 의 인자와 동일한 키 사용
+
+    Jupyter 등에서 스크립트를 수정한 뒤에도 반영되도록 phase0/phase1 모듈을 매번 reload 함.
     """
+    importlib.reload(phase0_setup)
+    importlib.reload(phase1_setup)
+    run_phase0 = phase0_setup.run_phase0
+    ETL_STEP_SQL = phase1_setup.ETL_STEP_SQL
+    run_master_table = phase1_setup.run_master_table
+    run_etl_steps = phase1_setup.run_etl_steps
+
     print("\n=== run_japan_etl ===\n")
 
     create_db = _get(flags, "create_database_if_missing", True)
@@ -60,9 +72,10 @@ def run_japan_etl(flags):
         print("[Skip] create_database_if_missing=False and CDM_ddl=False\n")
 
     if _get(flags, "master_table", False):
-        print("[master_table]")
+        print("[master_table]", flush=True)
+        t0 = time.perf_counter()
         run_master_table()
-        print()
+        print(f"[master_table] finished in {time.perf_counter() - t0:.1f}s\n", flush=True)
 
     any_etl = any(_get(flags, key, False) for key, _ in ETL_STEP_SQL)
     if any_etl:
@@ -80,7 +93,7 @@ def run_japan_etl(flags):
 
 def main():
     print("플래그 없음: codeToRun_japan.py 상단 변수 또는 codeToRun_japan.ipynb 에서 run_japan_etl(flags) 호출.\n")
-    return run_japan_etl({})
+    return run_japan_etl({})  # 내부에서 phase 모듈 reload
 
 
 if __name__ == "__main__":

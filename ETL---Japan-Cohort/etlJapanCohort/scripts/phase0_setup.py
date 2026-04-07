@@ -6,6 +6,7 @@ Phase 0: japan_cohort_cdm DB 생성 및 CDM DDL 적용
 
 from sqlalchemy import create_engine, text
 import os
+import time
 import urllib
 
 server = r"DESKTOP-HBA9S76\SQLEXPRESS01"
@@ -75,11 +76,15 @@ def run_phase0(cdm_ddl=True, create_database_if_missing=True):
         isolation_level="AUTOCOMMIT"
     )
 
-    print("[Phase0] Executing DDL (may take 1-2 min)...")
+    print("[Phase0] Executing DDL (may take several minutes)...", flush=True)
+    t0 = time.perf_counter()
     with engine_cdm.connect() as conn:
         try:
             conn.execute(text(ddl_content))
-            print("      DDL executed successfully.")
+            print(
+                f"      DDL executed successfully.  ({time.perf_counter() - t0:.1f}s)",
+                flush=True,
+            )
         except Exception as e:
             err = str(e)
             if "already exists" in err.lower() or "이미 있습니다" in err:
