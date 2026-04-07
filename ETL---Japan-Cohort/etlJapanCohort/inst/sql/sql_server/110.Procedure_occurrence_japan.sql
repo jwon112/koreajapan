@@ -52,7 +52,7 @@ SELECT
     (SELECT ISNULL(MAX(procedure_occurrence_id), 0) FROM @cdm_database.procedure_occurrence)
     + ROW_NUMBER() OVER (ORDER BY pr.claim_id, pr.statement_id, pr.procedure_code) AS procedure_occurrence_id,
     p.person_id,
-    COALESCE(lm.target_concept_id, cm_try.target_concept_id, jp_proc.concept_id, 0) AS procedure_concept_id,
+    COALESCE(cm_try.target_concept_id, jp_proc.concept_id, 0) AS procedure_concept_id,
     dt.proc_dt AS procedure_date,
     NULL AS procedure_datetime,
     44818517 AS procedure_type_concept_id,
@@ -102,33 +102,6 @@ OUTER APPLY (
         NULLIF(UPPER(LTRIM(RTRIM(pm.icd9cm_level2))), N'') AS pm_icd9_2,
         NULLIF(UPPER(LTRIM(RTRIM(pm.icd9cm_level1))), N'') AS pm_icd9_1
 ) pmc
--- Local mapping (project-owned). Built by scripts/procedure_mapping.py
-OUTER APPLY (
-    SELECT TOP (1) f.target_concept_id
-    FROM @cdm_database.jp_procedure_map_final f
-    WHERE f.source_code IN (
-        nd.norm_proc_code,
-        nh.norm_proc_nohyp,
-        COALESCE(pmc.pm_std_code, N''),
-        COALESCE(pmc.pm_icd9_3, N''),
-        COALESCE(pmc.pm_icd9_2, N''),
-        COALESCE(pmc.pm_icd9_1, N''),
-        COALESCE(ns.norm_slash1, N''),
-        COALESCE(ns.norm_slash2, N'')
-    )
-    ORDER BY
-        CASE
-            WHEN f.source_code = nd.norm_proc_code THEN 1
-            WHEN f.source_code = nh.norm_proc_nohyp THEN 2
-            WHEN pmc.pm_std_code IS NOT NULL AND f.source_code = pmc.pm_std_code THEN 3
-            WHEN pmc.pm_icd9_3 IS NOT NULL AND f.source_code = pmc.pm_icd9_3 THEN 4
-            WHEN pmc.pm_icd9_2 IS NOT NULL AND f.source_code = pmc.pm_icd9_2 THEN 5
-            WHEN pmc.pm_icd9_1 IS NOT NULL AND f.source_code = pmc.pm_icd9_1 THEN 6
-            WHEN ns.norm_slash1 IS NOT NULL AND f.source_code = ns.norm_slash1 THEN 7
-            WHEN ns.norm_slash2 IS NOT NULL AND f.source_code = ns.norm_slash2 THEN 8
-            ELSE 9
-        END
-) lm
 OUTER APPLY (
     SELECT TOP (1)
         m.target_concept_id
