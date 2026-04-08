@@ -29,6 +29,13 @@ ETL_STEP_SQL = [
     ("condition_occurrence", "080.Condition_occurrence_japan.sql"),
     ("drug_exposure", "100.Drug_exposure_japan.sql"),
     ("procedure_occurrence", "110.Procedure_occurrence_japan.sql"),
+    ("location", "120.Location_japan.sql"),
+    ("care_site", "130.Care_site_japan.sql"),
+    ("observation", "140.Observation_japan.sql"),
+    ("device_exposure", "150.Device_exposure_japan.sql"),
+    ("measurement", "160.Measurement_japan.sql"),
+    ("payer_plan_period", "170.Payer_plan_period_japan.sql"),
+    ("cost", "180.Cost_japan.sql"),
 ]
 
 MASTER_SQL = "010.Master_table_japan.sql"

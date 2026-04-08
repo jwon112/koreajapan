@@ -50,7 +50,7 @@ INSERT INTO @cdm_database.procedure_occurrence (
 )
 SELECT
     (SELECT ISNULL(MAX(procedure_occurrence_id), 0) FROM @cdm_database.procedure_occurrence)
-    + ROW_NUMBER() OVER (ORDER BY pr.claim_id, pr.statement_id, pr.procedure_code) AS procedure_occurrence_id,
+    + ROW_NUMBER() OVER (ORDER BY sm.master_seq) AS procedure_occurrence_id,
     p.person_id,
     COALESCE(cm_try.target_concept_id, jp_proc.concept_id, 0) AS procedure_concept_id,
     dt.proc_dt AS procedure_date,

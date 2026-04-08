@@ -45,7 +45,15 @@ condition_occurrence = False
 drug_exposure = False
 procedure_occurrence = False
 
-# --- 미구현 (켜도 [TODO] 로그만) ---
+# --- 확장 도메인 (일부는 '소스 없음'으로 0행이 정상) ---
+# [권장 순서(의존성)]
+#   visit_occurrence → care_site
+#   person → payer_plan_period
+#   (visit_occurrence, drug_exposure, procedure_occurrence) → cost
+#
+# [현재 구현 상태(일본 RAW 스키마 기준)]
+# - 실제 적재됨: care_site, payer_plan_period, cost
+# - 0행이 정상(no-op): location(주소/지역 소스 없음), observation/measurement/device_exposure(원천 테이블 없음)
 location = False
 care_site = False
 observation = False

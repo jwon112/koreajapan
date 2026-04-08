@@ -26,13 +26,6 @@ import phase0_setup
 import phase1_setup
 
 POST_ETL_FLAGS = (
-    "location",
-    "care_site",
-    "observation",
-    "device_exposure",
-    "measurement",
-    "payer_plan_period",
-    "cost",
     "generateEra",
     "dose_era",
     "cdm_source",
